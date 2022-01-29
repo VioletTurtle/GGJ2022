@@ -8,11 +8,8 @@ public class PlatformMovement : MonoBehaviour
     public MoveType movementType = MoveType.Stationary;
     public Transform[] horWaypoints;
     public Transform[] verWaypoints;
-    int waypointIndex = 0;
-    public float platformSpeed = 1;
     [Range(0,10)] public float changeSpeed = 1;
-    private float totalTime = 0.0f;
-    [Range(0.001f, 2f)]public float frequency = 1;
+    [Range(0, 5)] public float duration = 1f;
     // Start is called before the first frame update
     void Start()
     {
@@ -23,7 +20,7 @@ public class PlatformMovement : MonoBehaviour
     void Update()
     {
         runBehavior();
-        totalTime += Time.deltaTime;
+        
     }
 
     void runBehavior()
@@ -50,32 +47,11 @@ public class PlatformMovement : MonoBehaviour
 
     void Side_to_side()
     {
-        
-       
-
-        if (waypointIndex < horWaypoints.Length)
-        {
-            
-            //platformSpeed = (-changeSpeed * (float)Mathf.Cos(2f * (float)Mathf.PI * frequency * totalTime));
-            Vector3 targetPosition = horWaypoints[waypointIndex].position;
-            float delta = platformSpeed * Time.deltaTime;
-            transform.position = Vector2.MoveTowards(transform.position, targetPosition, delta);
-            
-            if (transform.position.x == targetPosition.x && transform.position.y == targetPosition.y)
-            {
-                if (waypointIndex + 1 == horWaypoints.Length)
-                    waypointIndex = 0;
-                else
-                    waypointIndex++;
-
-            }      
-            
-        }
-        else
-        {
-            waypointIndex = 0;
-        }
+        var factor = Mathf.PingPong(Time.time / (2f * duration), 1f);
+        factor = Mathf.SmoothStep(0, changeSpeed, factor);
+        transform.position = Vector2.Lerp(horWaypoints[0].position, horWaypoints[1].position, factor);
         //Translate platform back and forth between two waypoints
+        //platform slowing thanks to user276019 on stackoverflow
     }
 
 
@@ -83,26 +59,10 @@ public class PlatformMovement : MonoBehaviour
 
     void UpAndDown()
     {
-        if (waypointIndex < verWaypoints.Length)
-        {
-            platformSpeed = (changeSpeed * (float)Mathf.Cos(2f * (float)Mathf.PI * frequency));
-            Vector3 targetPosition = verWaypoints[waypointIndex].position;
-            float delta = platformSpeed * Time.deltaTime;
-            transform.position = Vector2.MoveTowards(transform.position, targetPosition, delta);
-            if (transform.position.x == targetPosition.x && transform.position.y == targetPosition.y)
-            {
-                if (waypointIndex + 1 == verWaypoints.Length)
-                    waypointIndex = 0;
-                else
-                    waypointIndex++;
-
-            }
-;
-        }
-        else
-        {
-            waypointIndex = 0;
-        }
+        var factor = Mathf.PingPong(Time.time / (2f * duration), 1f);
+        factor = Mathf.SmoothStep(0, changeSpeed, factor);
+        transform.position = Vector2.Lerp(verWaypoints[0].position, verWaypoints[1].position, factor);
         //Translate platform up and down between two waypoints
+        //platform slowing thanks to user276019 on stackoverflow
     }
 }
