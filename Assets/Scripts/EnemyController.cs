@@ -2,17 +2,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum Behaviors {Patrol, Attack};
+public enum Behaviors {Patrol, Attack, Idle};
 public enum EnemyType { Moth, Frog};
 
 public class EnemyController : MonoBehaviour
 {
+    
     public Behaviors aiBehavior = Behaviors.Patrol;
     public EnemyType aiType = EnemyType.Moth;
+    public Transform player;
     public float speed;
     int waypointIndex = 0;
-
+    float frogAttackTimer = 1f;
     public List<Transform> waypoints;
+    bool attackReady = true;
     // Start is called before the first frame update
     void Start()
     {
@@ -23,6 +26,7 @@ public class EnemyController : MonoBehaviour
     void Update()
     {
         runBehavior();
+        ToggleOff();
     }
 
     void runBehavior()
@@ -35,23 +39,51 @@ public class EnemyController : MonoBehaviour
             case Behaviors.Attack:
                 Attack();
                 break;
+            case Behaviors.Idle:
+                Idle();
+                break;
         }
     }
 
+    void ToggleOff()
+    {
+        if(aiType == EnemyType.Moth)
+        {
+            aiBehavior = Behaviors.Patrol;
+        }
+        if(aiType == EnemyType.Frog)
+        {
+            aiBehavior = Behaviors.Idle;
+        }
+    }
     void Move()
     {
 
     }
-
+    void Idle()
+    {
+        if(aiType == EnemyType.Moth)
+        {
+            aiBehavior = Behaviors.Patrol;
+        }
+    }
     void Attack()
     {
         if (aiType == EnemyType.Moth)
         {
             //get light source
             //Move moth toward light source
+            Transform target = player.transform;
+            transform.position = Vector2.MoveTowards(transform.position, target.position, speed * Time.deltaTime);
+
         }
         if (aiType == EnemyType.Frog)
         {
+            if (attackReady == true)
+            {
+                attackReady = false;
+                Invoke("FrogAttack", 2);
+            }
             //get light source
             //run a countdown/coroutine, if it finishes the frog will attack the light source/player with its tongue
 
@@ -79,4 +111,18 @@ public class EnemyController : MonoBehaviour
             }
 ;        }
     }
+
+    public void ReactToLight()
+    {
+        aiBehavior = Behaviors.Attack;
+        
+    }
+
+    void FrogAttack()
+    {
+        Debug.Log("Frog go blep");
+        attackReady = true;
+    }
+
+   //timer += time, if it reaches its threshold reset it to 0, otherwise keep incrementing
 }

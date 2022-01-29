@@ -28,11 +28,16 @@ public class LanternRaycast : MonoBehaviour
         {
             if (rayHit.collider != null)
             {
-                Debug.Log("Hit something");
+                //Debug.Log("Hit something");
                 GameObject hitObject = rayHit.collider.gameObject;
                 if (hitObject.CompareTag("PlatformChild"))
                 {
                     hitObject.GetComponentInParent<PlatformBasicController>().TurnOn();
+                }
+                //Add code here for enemy tag
+                if (hitObject.CompareTag("Enemy"))
+                {
+                    hitObject.GetComponent<EnemyController>().ReactToLight();
                 }
             }
         }
