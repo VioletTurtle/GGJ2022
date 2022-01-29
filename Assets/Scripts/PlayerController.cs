@@ -12,7 +12,7 @@ public class PlayerController : MonoBehaviour
     public bool isGrounded = false;
     [HideInInspector]
     public bool isFalling = false;
-
+    float startingTime;
     public float fallTimer = .3f;
     private float timeInAir = 0f;
 
@@ -47,6 +47,14 @@ public class PlayerController : MonoBehaviour
             lantern.SetActive(!lantern.activeSelf);
         }
     }
+
+    public void TurnLightOff()
+    {
+        if (lantern.activeSelf)
+        {
+            lantern.SetActive(false);
+        }
+    }
     void Move()
     {
         float hor = Input.GetAxis("Horizontal");
@@ -63,6 +71,7 @@ public class PlayerController : MonoBehaviour
                 
                 rigBody.AddForce(transform.up * jumpSpeed);
                 isGrounded = false;
+                startingTime = Time.time;
 
             }
         }
@@ -72,30 +81,49 @@ public class PlayerController : MonoBehaviour
     {
         if (!isGrounded)
         {
-            timeInAir += Time.deltaTime;
+            timeInAir += Time.time - startingTime;
             if (timeInAir >= fallTimer)
             {
                 isFalling = true;
+                
                 lantern.SetActive(false);
             }
         }
     }
 
-    public void OnCollisionEnter2D(Collision2D collision)
+    public void OnCollisionExit2D(Collision2D collision)
     {
         if(collision.gameObject.tag == "Ground")
         {
-            isGrounded = true;
-            isFalling = false;
+            isGrounded = false;
         }
+    }
+    public void OnCollisionEnter2D(Collision2D collision)
+    {
+        
+        if (collision.gameObject.tag == "Ground")
+        {
+            Vector3 dir = collision.gameObject.transform.position - gameObject.transform.position;
+            Debug.Log(dir.y);
+            if(dir.y <= 0)
+            {
+                isGrounded = true;
+                timeInAir = 0;
+                isFalling = false;
+            }
+        }
+
+        
 
         if(collision.gameObject.tag == "Enemy")//If hit by enemy tagged object, knockback
         {
-            float xMove = 0;
-            float yMove = 3;
-            Vector2 dir = collision.gameObject.transform.position - gameObject.transform.position;
+            if (collision.gameObject.GetComponent<EnemyController>().aiType == EnemyType.Moth) ;
+            {
+                TurnLightOff();
+            }
+            Vector2 dir =  gameObject.transform.position - collision.gameObject.transform.position;
             //Right side will be positive, left side will be negative
-            dir = -dir.normalized;
+            
             dir.y = 5;
 
             rigBody.AddForce(dir, ForceMode2D.Impulse);
