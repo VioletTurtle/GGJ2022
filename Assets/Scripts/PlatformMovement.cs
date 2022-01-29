@@ -9,7 +9,10 @@ public class PlatformMovement : MonoBehaviour
     public Transform[] horWaypoints;
     public Transform[] verWaypoints;
     int waypointIndex = 0;
-    public float platformSpeed = 3;
+    public float platformSpeed = 1;
+    [Range(0,10)] public float changeSpeed = 1;
+    private float totalTime = 0.0f;
+    [Range(0.001f, 2f)]public float frequency = 1;
     // Start is called before the first frame update
     void Start()
     {
@@ -20,6 +23,7 @@ public class PlatformMovement : MonoBehaviour
     void Update()
     {
         runBehavior();
+        totalTime += Time.deltaTime;
     }
 
     void runBehavior()
@@ -43,13 +47,20 @@ public class PlatformMovement : MonoBehaviour
         //Do Nothing
     }
 
+
     void Side_to_side()
     {
+        
+       
+
         if (waypointIndex < horWaypoints.Length)
         {
+            
+            //platformSpeed = (-changeSpeed * (float)Mathf.Cos(2f * (float)Mathf.PI * frequency * totalTime));
             Vector3 targetPosition = horWaypoints[waypointIndex].position;
             float delta = platformSpeed * Time.deltaTime;
             transform.position = Vector2.MoveTowards(transform.position, targetPosition, delta);
+            
             if (transform.position.x == targetPosition.x && transform.position.y == targetPosition.y)
             {
                 if (waypointIndex + 1 == horWaypoints.Length)
@@ -57,8 +68,8 @@ public class PlatformMovement : MonoBehaviour
                 else
                     waypointIndex++;
 
-            }
-;
+            }      
+            
         }
         else
         {
@@ -67,10 +78,14 @@ public class PlatformMovement : MonoBehaviour
         //Translate platform back and forth between two waypoints
     }
 
+
+  
+
     void UpAndDown()
     {
         if (waypointIndex < verWaypoints.Length)
         {
+            platformSpeed = (changeSpeed * (float)Mathf.Cos(2f * (float)Mathf.PI * frequency));
             Vector3 targetPosition = verWaypoints[waypointIndex].position;
             float delta = platformSpeed * Time.deltaTime;
             transform.position = Vector2.MoveTowards(transform.position, targetPosition, delta);

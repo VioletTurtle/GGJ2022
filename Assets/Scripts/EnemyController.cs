@@ -19,7 +19,10 @@ public class EnemyController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        player = GameObject.Find("Player").GetComponent<Transform>();
+        if (GameObject.Find("Player"))
+        {
+            player = GameObject.Find("Player").GetComponent<Transform>();
+        }
     }
 
     // Update is called once per frame
