@@ -1,19 +1,29 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Lumin;
 
 public class PlayerController : MonoBehaviour
 {
     Rigidbody2D rigBody;
     public float Speed = 5;
     public float jumpSpeed = 20f;
-    bool isGrounded = false;
+    [HideInInspector]
+    public bool isGrounded = false;
+    [HideInInspector]
+    public bool isFalling = false;
+
+    public float fallTimer = .3f;
+    private float timeInAir = 0f;
+
+    public GameObject lantern;
+    
  
     // Start is called before the first frame update
     void Start()
     {
         rigBody = GetComponent<Rigidbody2D>();
-
+        lantern = gameObject.transform.GetChild(0).gameObject;
     }
 
     // Update is called once per frame
@@ -22,6 +32,7 @@ public class PlayerController : MonoBehaviour
         Move();
         Jump();
         ToggleLight();
+        AirborneMath();
     }
 
     private void FixedUpdate()
@@ -29,9 +40,12 @@ public class PlayerController : MonoBehaviour
         
     }
 
-    void ToggleLight()
+    public void ToggleLight()
     {
-        //Method to toggle light on or off
+        if (!isFalling && Input.GetKeyDown(KeyCode.Mouse0))
+        {
+            lantern.SetActive(!lantern.activeSelf);
+        }
     }
     void Move()
     {
@@ -54,11 +68,25 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    private void AirborneMath()
+    {
+        if (!isGrounded)
+        {
+            timeInAir += Time.deltaTime;
+            if (timeInAir >= fallTimer)
+            {
+                isFalling = true;
+                lantern.SetActive(false);
+            }
+        }
+    }
+
     public void OnCollisionEnter2D(Collision2D collision)
     {
         if(collision.gameObject.tag == "Ground")
         {
             isGrounded = true;
+            isFalling = false;
         }
 
         if(collision.gameObject.tag == "Enemy")//If hit by enemy tagged object, knockback
