@@ -21,6 +21,7 @@ public class PlayerController : MonoBehaviour
     {
         Move();
         Jump();
+        ToggleLight();
     }
 
     private void FixedUpdate()
@@ -28,6 +29,10 @@ public class PlayerController : MonoBehaviour
         
     }
 
+    void ToggleLight()
+    {
+        //Method to toggle light on or off
+    }
     void Move()
     {
         float hor = Input.GetAxis("Horizontal");
@@ -54,6 +59,18 @@ public class PlayerController : MonoBehaviour
         if(collision.gameObject.tag == "Ground")
         {
             isGrounded = true;
+        }
+
+        if(collision.gameObject.tag == "Enemy")//If hit by enemy tagged object, knockback
+        {
+            float xMove = 0;
+            float yMove = 3;
+            Vector2 dir = collision.gameObject.transform.position - gameObject.transform.position;
+            //Right side will be positive, left side will be negative
+            dir = -dir.normalized;
+            dir.y = 5;
+
+            rigBody.AddForce(dir, ForceMode2D.Impulse);
         }
     }
 }

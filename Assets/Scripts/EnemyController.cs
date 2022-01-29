@@ -3,11 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public enum Behaviors {Patrol, Attack};
-
+public enum EnemyType { Moth, Frog};
 
 public class EnemyController : MonoBehaviour
 {
     public Behaviors aiBehavior = Behaviors.Patrol;
+    public EnemyType aiType = EnemyType.Moth;
     public float speed;
     int waypointIndex = 0;
 
@@ -44,6 +45,17 @@ public class EnemyController : MonoBehaviour
 
     void Attack()
     {
+        if (aiType == EnemyType.Moth)
+        {
+            //get light source
+            //Move moth toward light source
+        }
+        if (aiType == EnemyType.Frog)
+        {
+            //get light source
+            //run a countdown/coroutine, if it finishes the frog will attack the light source/player with its tongue
+
+        }
         //While in light move to towards its source
         //On contact with the player knock them back
     }
