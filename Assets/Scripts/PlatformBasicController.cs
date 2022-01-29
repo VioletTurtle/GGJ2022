@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class PlatformBasicController : MonoBehaviour
 {
-    private BoxCollider2D collider;
+    private BoxCollider2D col;
     private SpriteRenderer sr;
     // Start is called before the first frame update
     void Start()
     {
-        collider = gameObject.GetComponent<BoxCollider2D>();
+        col = gameObject.GetComponent<BoxCollider2D>();
         sr = gameObject.GetComponent<SpriteRenderer>();
     }
 
@@ -21,13 +21,13 @@ public class PlatformBasicController : MonoBehaviour
 
     private void TurnOff()
     {
-        collider.enabled = false;
+        col.enabled = false;
         sr.enabled = false;
     }
 
     public void TurnOn()
     {
-        collider.enabled = true;
+        col.enabled = true;
         sr.enabled = true;
     }
 }

@@ -57,9 +57,9 @@ MonoBehaviour:
   m_ShadowIntensity: 0
   m_ShadowVolumeIntensity: 0
   m_PointLightInnerAngle: 0
-  m_PointLightOuterAngle: 20.42
-  m_PointLightInnerRadius: 0.37471622
-  m_PointLightOuterRadius: 12.524164
+  m_PointLightOuterAngle: 20
+  m_PointLightInnerRadius: 0.4
+  m_PointLightOuterRadius: 12
   m_PointLightDistance: 3
   m_PointLightQuality: 1
   m_ShapeLightParametricSides: 5
@@ -82,6 +82,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3123605032070291386}
   - component: {fileID: 3123605032070291387}
+  - component: {fileID: 254929263}
   m_Layer: 0
   m_Name: Lantern
   m_TagString: Untagged
@@ -155,3 +156,15 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &254929263
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3123605032070291384}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3da5450570c4bc84aa8dbe951a9cadd1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
