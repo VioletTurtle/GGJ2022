@@ -10,7 +10,7 @@ public class EnemyController : MonoBehaviour
     
     public Behaviors aiBehavior = Behaviors.Patrol;
     public EnemyType aiType = EnemyType.Moth;
-    public Transform player;
+    private Transform player;
     public float speed;
     int waypointIndex = 0;
     float frogAttackTimer = 1f;
@@ -19,7 +19,7 @@ public class EnemyController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        player = GameObject.Find("Player").GetComponent<Transform>();
     }
 
     // Update is called once per frame
