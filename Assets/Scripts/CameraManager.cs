@@ -4,16 +4,32 @@ using UnityEngine;
 
 public class CameraManager : MonoBehaviour
 {
-    public GameObject player;
-    // Start is called before the first frame update
-    void Start()
+    public Transform player;
+    public Transform bg1;
+    public Transform bg2;
+
+    void FixedUpdate()
     {
-       
+        Vector3 targetPos = new Vector3(transform.position.x, player.position.y + 3, transform.position.z);
+        transform.position = Vector3.Lerp(transform.position, targetPos, 0.2f);
+
+        if(transform.position.y >= bg2.position.y)
+        {
+            bg1.position = new Vector3(bg1.position.x, bg2.position.y + 11.6633f, bg1.position.z);
+            SwitchBackground();
+        }
+
+        if(transform.position.y < bg1.position.y)
+        {
+            bg2.position = new Vector3(bg2.position.x, bg1.position.y - 11.6633f, bg2.position.z);
+            SwitchBackground();
+        }
     }
 
-    // Update is called once per frame
-    void Update()
+    private void SwitchBackground()
     {
-        transform.position = new Vector3(0, player.transform.position.y, -10);
+        Transform temp = bg1;
+        bg1 = bg2;
+        bg2 = temp;
     }
 }
