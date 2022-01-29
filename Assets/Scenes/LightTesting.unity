@@ -141,6 +141,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 273899324585675781, guid: b6378c14cc3c8534db7c813013a0d002, type: 3}
+      propertyPath: movementType
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 273899324585675781, guid: b6378c14cc3c8534db7c813013a0d002, type: 3}
       propertyPath: horWaypoints.Array.size
       value: 2
       objectReference: {fileID: 0}
@@ -324,7 +328,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   aiBehavior: 2
   aiType: 1
-  player: {fileID: 2093137807}
   speed: 0
   waypoints:
   - {fileID: 0}
@@ -704,11 +707,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!4 &2093137807 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 3123605032070291386, guid: e893d8359060e4846b4e3b55f8636695, type: 3}
-  m_PrefabInstance: {fileID: 3123605033317471337}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &3090095601646504778
 PrefabInstance:
   m_ObjectHideFlags: 0
