@@ -139,7 +139,7 @@ GameObject:
   - component: {fileID: 4241787939880840361}
   m_Layer: 0
   m_Name: Moving Platform
-  m_TagString: Ground
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -174,7 +174,7 @@ GameObject:
   - component: {fileID: 299860137456471644}
   m_Layer: 0
   m_Name: PlatformSprite
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
