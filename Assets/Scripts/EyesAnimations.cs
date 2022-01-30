@@ -38,7 +38,7 @@ public class EyesAnimations : MonoBehaviour
         Vector3 dir = Vector3.Normalize(player.transform.position - transform.position);
         angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
         //angle = Vector3.Angle(player.transform.position - transform.position, transform.right);
-        Debug.Log(dir);
+        //Debug.Log(dir);
 
         //correcting angle so that left is 0 and right is 180, and it goes from 0 to 360
         angle += 180;
