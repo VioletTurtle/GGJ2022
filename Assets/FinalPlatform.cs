@@ -1,12 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class FinalPlatform : MonoBehaviour
 {
     // Start is called before the first frame update
     bool slowTimeCheck = false;
     public GameObject finalLight;
+    public Image fadeToWhite;
+    
     void Start()
     {
         
@@ -16,6 +19,7 @@ public class FinalPlatform : MonoBehaviour
     void Update()
     {
         SlowTime();
+        GrowLight();
         Debug.Log("Timescale = " + Time.timeScale);
     }
 
@@ -34,7 +38,7 @@ public class FinalPlatform : MonoBehaviour
         {
             //steadily slow time for a certain amount of time. 
             slowTimeCheck = true;
-            //GameObject.FindGameObjectWithTag("WinDetect").GetComponent<MenuImageChanger>().hasWon = true;
+            GameObject.FindGameObjectWithTag("WinDetect").GetComponent<MenuImageChanger>().hasWon = true;
 
 
         }
@@ -43,8 +47,8 @@ public class FinalPlatform : MonoBehaviour
     void SlowTime()
     {
         if (slowTimeCheck) {
-            Time.timeScale -= Mathf.Pow(Time.deltaTime, 4.0f);
-            if (Time.timeScale <= 0.01)
+            Time.timeScale = Mathf.Pow(Time.fixedDeltaTime, -2);
+            if (Time.timeScale <= 0.01 || Time.timeScale >= 100)
             {
                 slowTimeCheck = false;
                 Time.timeScale = 1.0f;
@@ -54,6 +58,12 @@ public class FinalPlatform : MonoBehaviour
 
     void GrowLight()
     {
+        if (slowTimeCheck)
+        {
+            var tempColor = fadeToWhite.GetComponent<Image>().color;
+            tempColor.a += Time.deltaTime * 0.5f;
+            fadeToWhite.color = tempColor;
+        }
         //Steadily grow light range to cover screen
     }
 }
