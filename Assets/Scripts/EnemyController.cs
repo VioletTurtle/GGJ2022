@@ -12,7 +12,7 @@ public class EnemyController : MonoBehaviour
     public EnemyType aiType = EnemyType.Moth;
     private Transform player;
     public float speed;
-    public int waypointIndex = 0;
+    int waypointIndex = 0;
     float frogAttackTimer = 2f;
     public List<Transform> waypoints;
     bool attackReady = true;
@@ -151,7 +151,7 @@ public class EnemyController : MonoBehaviour
             transform.position = Vector2.MoveTowards(transform.position, targetPosition, delta);
             if(transform.position.x == targetPosition.x && transform.position.y == targetPosition.y)
             {
-                if (waypointIndex + 1 >= waypoints.Count)
+                if (waypointIndex + 1 == waypoints.Count)
                     waypointIndex = 0;
                 else
                     waypointIndex++;
