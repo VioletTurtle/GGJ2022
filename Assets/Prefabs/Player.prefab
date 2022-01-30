@@ -68,8 +68,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 974678079
+  m_SortingLayer: 1
   m_SortingOrder: 0
   m_Sprite: {fileID: -2812528345037056104, guid: 24d47b94847ef2541ad5a6ae51ac72ab, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -95,6 +95,7 @@ GameObject:
   - component: {fileID: 1527128226850345548}
   - component: {fileID: 1527128226850345551}
   - component: {fileID: 259667226}
+  - component: {fileID: 1905182965047725620}
   m_Layer: 2
   m_Name: Player
   m_TagString: Player
@@ -199,20 +200,20 @@ MonoBehaviour:
   m_LightType: 3
   m_BlendStyleIndex: 0
   m_FalloffIntensity: 0.5
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 0.9411765, b: 0.78039217, a: 1}
   m_Intensity: 1
   m_LightVolumeOpacity: 0
   m_ApplyToSortingLayers: 000000002b6e5cc63f68183a
   m_LightCookieSprite: {fileID: 0}
   m_UseNormalMap: 0
   m_LightOrder: 0
-  m_AlphaBlendOnOverlap: 0
+  m_AlphaBlendOnOverlap: 1
   m_ShadowIntensity: 0
   m_ShadowVolumeIntensity: 0
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
-  m_PointLightInnerRadius: 0
-  m_PointLightOuterRadius: 1.62
+  m_PointLightInnerRadius: 1.5
+  m_PointLightOuterRadius: 1.5
   m_PointLightDistance: 3
   m_PointLightQuality: 1
   m_ShapeLightParametricSides: 5
@@ -225,6 +226,21 @@ MonoBehaviour:
   - {x: 0.5, y: -0.5, z: 0}
   - {x: 0.5, y: 0.5, z: 0}
   - {x: -0.5, y: 0.5, z: 0}
+--- !u!114 &1905182965047725620
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1527128226850345550}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 32b0cefe9e6f257469430bc314c43dec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  light2d: {fileID: 259667226}
+  frequency: 2
+  maxsize: 1.1
 --- !u!1 &2331766678897656790
 GameObject:
   m_ObjectHideFlags: 0
@@ -620,8 +636,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 974678079
+  m_SortingLayer: 1
   m_SortingOrder: 0
   m_Sprite: {fileID: -2812528345037056104, guid: 24d47b94847ef2541ad5a6ae51ac72ab, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -784,8 +800,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 974678079
+  m_SortingLayer: 1
   m_SortingOrder: 0
   m_Sprite: {fileID: 6793070692276273538, guid: 52874931368a24e48aa0ccafd9262aeb, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -808,14 +824,6 @@ PrefabInstance:
     - target: {fileID: 2445488715100414079, guid: e893d8359060e4846b4e3b55f8636695, type: 3}
       propertyPath: m_Layer
       value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 2895390543883938233, guid: e893d8359060e4846b4e3b55f8636695, type: 3}
-      propertyPath: m_PointLightInnerRadius
-      value: 0.32899386
-      objectReference: {fileID: 0}
-    - target: {fileID: 2895390543883938233, guid: e893d8359060e4846b4e3b55f8636695, type: 3}
-      propertyPath: m_ApplyToSortingLayers.Array.size
-      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 3123605032070291384, guid: e893d8359060e4846b4e3b55f8636695, type: 3}
       propertyPath: m_Name
@@ -887,7 +895,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5085722886183276635, guid: e893d8359060e4846b4e3b55f8636695, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: 0.029
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e893d8359060e4846b4e3b55f8636695, type: 3}
