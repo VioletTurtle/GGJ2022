@@ -4,19 +4,24 @@ using UnityEngine;
 
 public class MothAnims : MonoBehaviour
 {
+    public bool right = false;
+    public float noiseStrength;
+    public float noiseFrequency;
+    public float LerpSpeed;
     Animator mothAnim;
-    Rigidbody2D body;
+    GameObject spriteObj;
+
     // Start is called before the first frame update
     void Start()
     {
-        body = GetComponent<Rigidbody2D>();
         mothAnim = GetComponentInChildren<Animator>();
+        spriteObj = mothAnim.gameObject;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(body.velocity.y > 0)
+        if(right)
         {
             mothAnim.SetBool("Right", true);
         }
@@ -25,5 +30,10 @@ public class MothAnims : MonoBehaviour
             mothAnim.SetBool("Right", false);
         }
 
+
+        float PosY = noiseStrength * Mathf.Sin(Random.Range(-1f, 1f) * noiseFrequency);
+        float PosX = noiseStrength * Mathf.Sin(Random.Range(-1f, 1f) * noiseFrequency);
+
+        spriteObj.transform.localPosition = Vector2.Lerp(spriteObj.transform.localPosition, new Vector2(PosX, PosY), Time.deltaTime * LerpSpeed);
     }
 }

@@ -19,6 +19,9 @@ public class EnemyController : MonoBehaviour
     GameObject tongueTip;
     public LineRenderer lr;
     float timer;
+
+    private MothAnims mothAnimate;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -27,6 +30,7 @@ public class EnemyController : MonoBehaviour
             player = GameObject.Find("Player").GetComponent<Transform>();
         }
         lr = gameObject.GetComponent<LineRenderer>();
+        mothAnimate = GetComponentInChildren<MothAnims>();
     }
 
     // Update is called once per frame
@@ -84,6 +88,8 @@ public class EnemyController : MonoBehaviour
             Transform target = player.transform;
             transform.position = Vector2.MoveTowards(transform.position, target.position, speed * Time.deltaTime);
 
+            mothAnimate.right = (target.position - transform.position).normalized.x > 0 ? true : false;
+
         }
         if (aiType == EnemyType.Frog)
         {
@@ -121,7 +127,9 @@ public class EnemyController : MonoBehaviour
                     waypointIndex++;
                 
             }
-;        }
+
+            mothAnimate.right = (targetPosition - transform.position).normalized.x > 0 ? true : false;
+        }
     }
 
     public void ReactToLight()
