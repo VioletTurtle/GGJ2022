@@ -24,9 +24,14 @@ public class EnemyController : MonoBehaviour
     private MothAnims mothAnimate;
     private FrogAnimations frogAnimate;
 
+    private AudioSource aSource;
+    public AudioClip tongueOut;
+    public AudioClip tongueIn;
+
     // Start is called before the first frame update
     void Start()
     {
+        aSource = GetComponent<AudioSource>();
         if (GameObject.Find("Player"))
         {
             player = GameObject.Find("Player").GetComponent<Transform>();
@@ -170,7 +175,10 @@ public class EnemyController : MonoBehaviour
     void FrogAttack()
     {
         Debug.Log("Frog go blep");
-        
+
+        aSource.clip = tongueOut;
+        aSource.Play();
+
         lr.SetPosition(0, gameObject.transform.position);
         lr.SetPosition(1, player.transform.position);
         attackReady = true;
@@ -182,6 +190,8 @@ public class EnemyController : MonoBehaviour
     {
         lr.enabled = true;
         yield return new WaitForSeconds(0.5f);
+        aSource.clip = tongueIn;
+        aSource.Play();
         lr.enabled = false;
     }
 
