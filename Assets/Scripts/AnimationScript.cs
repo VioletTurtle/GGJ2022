@@ -87,7 +87,7 @@ public class AnimationScript : MonoBehaviour
         }
         legAnims.SetBool("Right", right);
 
-        legAnims.SetBool("Run", body.velocity.sqrMagnitude > 0.1f);
+        legAnims.SetBool("Run", Mathf.Abs(body.velocity.x) > 0.1f);
 
         //Debug.Log(body.velocity + "; right: " + right + "; Run: " + (body.velocity.sqrMagnitude > 0.1f));
 
