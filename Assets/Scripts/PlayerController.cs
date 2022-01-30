@@ -26,6 +26,8 @@ public class PlayerController : MonoBehaviour
     private GameObject currentPlatform;
     private Vector3 platformOffset;
     private setCursor cursorScript;
+
+    private AudioSource aSource;
  
     // Start is called before the first frame update
     void Start()
@@ -34,7 +36,7 @@ public class PlayerController : MonoBehaviour
         light2d = gameObject.transform.GetChild(0).GetComponentInChildren<Light2D>();
         lantray = GetComponentInChildren<LanternRaycast>();
         cursorScript = GetComponent<setCursor>();
-
+        aSource = GetComponent<AudioSource>();
 
         lampOn = true;
         ToggleLight(false);
@@ -87,6 +89,7 @@ public class PlayerController : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.Space))
             {
+                aSource.Play();
                 //V = Square root of (2 g h)
                 float jumpImpulse = Mathf.Sqrt(2 * rigBody.gravityScale * jumpHeight);
                 rigBody.AddForce(transform.up * jumpImpulse, ForceMode2D.Impulse);
