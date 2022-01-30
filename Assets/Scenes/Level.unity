@@ -1164,17 +1164,21 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 259667226, guid: bf4439a020cc499429e500aa92437efe, type: 3}
+      propertyPath: m_FalloffIntensity
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 1527128226850345539, guid: bf4439a020cc499429e500aa92437efe, type: 3}
       propertyPath: m_RootOrder
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 1527128226850345539, guid: bf4439a020cc499429e500aa92437efe, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1527128226850345539, guid: bf4439a020cc499429e500aa92437efe, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.85
+      value: -3.2
       objectReference: {fileID: 0}
     - target: {fileID: 1527128226850345539, guid: bf4439a020cc499429e500aa92437efe, type: 3}
       propertyPath: m_LocalPosition.z
@@ -2025,7 +2029,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3090095600225740087, guid: 447bf89ed1a91e54c9b514d1a527bd45, type: 3}
       propertyPath: m_Size.x
-      value: 3
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3090095600225740087, guid: 447bf89ed1a91e54c9b514d1a527bd45, type: 3}
       propertyPath: m_SpriteTilingProperty.border.w
