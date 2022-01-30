@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class FinalPlatform : MonoBehaviour
@@ -38,21 +39,25 @@ public class FinalPlatform : MonoBehaviour
         {
             //steadily slow time for a certain amount of time. 
             slowTimeCheck = true;
-            GameObject.FindGameObjectWithTag("WinDetect").GetComponent<MenuImageChanger>().hasWon = true;
-
-
+            if (GameObject.FindGameObjectWithTag("WinDetect"))
+            {
+                GameObject.FindGameObjectWithTag("WinDetect").GetComponent<MenuImageChanger>().hasWon = true;
+            }
+            
         }
     }
 
     void SlowTime()
     {
         if (slowTimeCheck) {
-            Time.timeScale = Mathf.Pow(Time.fixedDeltaTime, -2);
-            if (Time.timeScale <= 0.01 || Time.timeScale >= 100)
+            Time.timeScale = Time.timeScale - Time.deltaTime;
+            if (Time.timeScale >= 100 || Time.timeScale <= 0.01f)
             {
                 slowTimeCheck = false;
-                Time.timeScale = 1.0f;
+                SceneManager.LoadScene("Credits");
             }
+            
+            
         }
     }
 
@@ -61,8 +66,10 @@ public class FinalPlatform : MonoBehaviour
         if (slowTimeCheck)
         {
             var tempColor = fadeToWhite.GetComponent<Image>().color;
-            tempColor.a += Time.deltaTime * 0.5f;
+            tempColor.a += Time.deltaTime * 1f;
+            Debug.Log(tempColor.a);
             fadeToWhite.color = tempColor;
+            
         }
         //Steadily grow light range to cover screen
     }
