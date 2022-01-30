@@ -12,7 +12,7 @@ public class EnemyController : MonoBehaviour
     public EnemyType aiType = EnemyType.Moth;
     private Transform player;
     public float speed;
-    public int waypointIndex = 0;
+    int waypointIndex = 0;
     float frogAttackTimer = 2f;
     public List<Transform> waypoints;
     bool attackReady = true;
@@ -26,7 +26,7 @@ public class EnemyController : MonoBehaviour
 
     private AudioSource aSource;
     public AudioClip tongueOut;
-    //public AudioClip tongueIn;
+    public AudioClip tongueIn;
 
     // Start is called before the first frame update
     void Start()
@@ -151,7 +151,7 @@ public class EnemyController : MonoBehaviour
             transform.position = Vector2.MoveTowards(transform.position, targetPosition, delta);
             if(transform.position.x == targetPosition.x && transform.position.y == targetPosition.y)
             {
-                if (waypointIndex + 1 >= waypoints.Count)
+                if (waypointIndex + 1 == waypoints.Count)
                     waypointIndex = 0;
                 else
                     waypointIndex++;
@@ -190,8 +190,8 @@ public class EnemyController : MonoBehaviour
     {
         lr.enabled = true;
         yield return new WaitForSeconds(0.5f);
-        //aSource.clip = tongueIn;
-        //aSource.Play();
+        aSource.clip = tongueIn;
+        aSource.Play();
         lr.enabled = false;
     }
 
