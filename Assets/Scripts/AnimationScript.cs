@@ -33,6 +33,14 @@ public class AnimationScript : MonoBehaviour
     public float eyesSmoothTime = 0.05f;
     public float eyesDistanceFactor = 25f;
 
+    public Sprite blinkSprite1;
+    public Sprite blinkSprite2;
+
+    public float fuzzInterval = 0.5f;
+    bool fuzz;
+    public float blinkInterval = 3f;
+    bool blink;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -43,6 +51,10 @@ public class AnimationScript : MonoBehaviour
             closeSprite.enabled = false;
 
         eyesStartPos = eyesSprite.transform.localPosition;
+
+        StartCoroutine(Coro_FuzzToggle());
+
+        StartCoroutine(Coro_Blink(blinkInterval + Random.Range(-0.5f, 1f))); //random blinks
     }
 
     // Update is called once per frame
@@ -83,7 +95,16 @@ public class AnimationScript : MonoBehaviour
 
         //remap the angle to a number in the index
         spriteIndex = Mathf.RoundToInt(Mathf.Lerp(0, 7, angle / 360));
-        eyesSprite.sprite = EyesSprites1[spriteIndex];
+
+        if (blink)
+        {
+            eyesSprite.sprite = fuzz ? blinkSprite1 : blinkSprite2;
+        }
+        else
+        {
+
+            eyesSprite.sprite = fuzz ? EyesSprites1[spriteIndex] : EyesSprites2[spriteIndex];
+        }
 
         Vector3 velocity3d = new Vector3(body.velocity.x, body.velocity.y, 0f);
         velocity3d = velocity3d.sqrMagnitude < 0.1f ? Vector3.zero : velocity3d;
@@ -113,5 +134,28 @@ public class AnimationScript : MonoBehaviour
     public void UpdateJump(bool jumping)
     {
         legAnims.SetBool("Jump", jumping);
+    }
+
+
+    IEnumerator Coro_FuzzToggle()
+    {
+        yield return new WaitForSeconds(fuzzInterval);
+        fuzz = !fuzz;
+
+        StartCoroutine(Coro_FuzzToggle());
+    }
+    IEnumerator Coro_Blink(float time)
+    {
+        yield return new WaitForSeconds(time);
+        blink = true;
+
+        StartCoroutine(Coro_UnBlink());
+    }
+    IEnumerator Coro_UnBlink()
+    {
+        yield return new WaitForSeconds(0.25f);
+        blink = false;
+
+        StartCoroutine(Coro_Blink(blinkInterval + Random.Range(-0.5f, 1f))); //random blinks
     }
 }
