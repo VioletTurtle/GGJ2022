@@ -51,7 +51,7 @@ public class FinalPlatform : MonoBehaviour
     {
         if (slowTimeCheck) {
             Time.timeScale = Time.timeScale - Time.deltaTime;
-            if (Time.timeScale >= 100 || Time.timeScale <= 0.01f)
+            if (Time.timeScale >= 100 || Time.timeScale <= 0.2f)
             {
                 slowTimeCheck = false;
                 SceneManager.LoadScene("Credits");
