@@ -179,6 +179,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Speed: 5
+  friction: 0.2
   jumpHeight: 30
   isGrounded: 0
   isFalling: 0
@@ -203,7 +204,7 @@ MonoBehaviour:
   m_Color: {r: 1, g: 0.9411765, b: 0.78039217, a: 1}
   m_Intensity: 1
   m_LightVolumeOpacity: 0
-  m_ApplyToSortingLayers: 000000002b6e5cc63f68183a
+  m_ApplyToSortingLayers: 000000002b6e5cc63f68183aeb723a1c
   m_LightCookieSprite: {fileID: 0}
   m_UseNormalMap: 0
   m_LightOrder: 0

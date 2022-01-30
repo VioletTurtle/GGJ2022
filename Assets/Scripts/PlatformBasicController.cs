@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlatformBasicController : MonoBehaviour
 {
-    private float turnoffDelay = 0.75f;
+    private float turnoffDelay = 0.5f;
     private float currDelay;
     public bool platformOn = false;
     public bool debug;

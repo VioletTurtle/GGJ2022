@@ -94,7 +94,7 @@ public class PlayerController : MonoBehaviour
             if(rigBody.velocity.y < 0f) //only start counting down air timer when moving down
                 timeInAir += Time.deltaTime; //replace from Time.time - starting
 
-            Debug.Log("time in air: " + timeInAir);
+            //Debug.Log("time in air: " + timeInAir);
 
             if (timeInAir >= fallTimer) 
             {

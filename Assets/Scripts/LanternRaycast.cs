@@ -13,12 +13,14 @@ public class LanternRaycast : MonoBehaviour
     // Update is called once per frame
     void LateUpdate()
     {
+        //Debug.Log("attempting raycasts");
         RaycastHit2D[] hits = new RaycastHit2D[10];
         for (int i = 0; i < 10; i++)
         {
             //Quaternion math:
             //https://answers.unity.com/questions/146975/how-to-raycast-on-45-degree.html
             RaycastHit2D hit = Physics2D.Raycast(transform.position, Quaternion.Euler(0, 0, -10f + 2f * i) * transform.right, 40f);
+
             Debug.DrawRay(transform.position, Quaternion.Euler(0, 0, -10f + 2f * i) * transform.right * 40, Color.red);
             hits.SetValue(hit, i);
         }
@@ -33,10 +35,16 @@ public class LanternRaycast : MonoBehaviour
                 if (hitObject.CompareTag("PlatformChild"))
                 {
                     if(hitObject.GetComponentInParent<PlatformBasicController>() != null)
+                    {
+                        //Debug.LogWarning("Turning on!");
                         hitObject.GetComponentInParent<PlatformBasicController>().TurnOn();
+                    }
 
                     if (hitObject.transform.parent.GetComponentInParent<PlatformBasicController>() != null)
-                        hitObject.transform.parent.GetComponentInParent<PlatformBasicController>().TurnOn();
+                    {
+                        //Debug.LogWarning("Turning on!");
+                        hitObject.GetComponentInParent<PlatformBasicController>().TurnOn();
+                    }
                 }
                 //Add code here for enemy tag
                 if (hitObject.CompareTag("Enemy"))

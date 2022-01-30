@@ -160,6 +160,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1895749961}
     m_Modifications:
+    - target: {fileID: 735436646027809205, guid: 447bf89ed1a91e54c9b514d1a527bd45, type: 3}
+      propertyPath: debug
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3090095600225740085, guid: 447bf89ed1a91e54c9b514d1a527bd45, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -170,7 +174,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3090095600225740085, guid: 447bf89ed1a91e54c9b514d1a527bd45, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.6964376
+      value: -0.31
       objectReference: {fileID: 0}
     - target: {fileID: 3090095600225740085, guid: 447bf89ed1a91e54c9b514d1a527bd45, type: 3}
       propertyPath: m_LocalPosition.z
@@ -466,7 +470,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3090095600225740085, guid: 447bf89ed1a91e54c9b514d1a527bd45, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 7.553538
+      value: 6.9700003
       objectReference: {fileID: 0}
     - target: {fileID: 3090095600225740085, guid: 447bf89ed1a91e54c9b514d1a527bd45, type: 3}
       propertyPath: m_LocalPosition.z
@@ -685,7 +689,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1097312715362066221, guid: c95edae8ba0a4684d9f9c286afa74e97, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2.4
+      value: 2.65
       objectReference: {fileID: 0}
     - target: {fileID: 1097312715362066221, guid: c95edae8ba0a4684d9f9c286afa74e97, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1333,7 +1337,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -967021013
-  m_SortingLayer: -3
+  m_SortingLayer: -2
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 15ebee1c1bf20df40840e79d5be4c3e2, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -1664,7 +1668,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3090095600225740085, guid: 447bf89ed1a91e54c9b514d1a527bd45, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 4.6835375
+      value: 4.1
       objectReference: {fileID: 0}
     - target: {fileID: 3090095600225740085, guid: 447bf89ed1a91e54c9b514d1a527bd45, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1908,7 +1912,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -967021013
-  m_SortingLayer: -3
+  m_SortingLayer: -2
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 15ebee1c1bf20df40840e79d5be4c3e2, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
