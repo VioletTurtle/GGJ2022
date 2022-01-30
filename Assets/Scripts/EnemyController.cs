@@ -185,7 +185,15 @@ public class EnemyController : MonoBehaviour
         lr.enabled = false;
     }
 
-
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.name == "Player")//If hit by enemy tagged object, knockback
+        {
+            Vector2 dir = collision.gameObject.transform.position - gameObject.transform.position;
+            collision.gameObject.GetComponent<PlayerController>().EnemyAttack(dir);
+        }
+    }
+    
  
    //timer += time, if it reaches its threshold reset it to 0, otherwise keep incrementing
 }

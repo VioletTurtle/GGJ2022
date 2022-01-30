@@ -123,18 +123,6 @@ public class PlayerController : MonoBehaviour
         {
             CheckGround(collision.contacts, collision);
         }
-        
-
-        if(collision.gameObject.tag == "Enemy")//If hit by enemy tagged object, knockback
-        {
-            if (collision.gameObject.GetComponent<EnemyController>().aiType == EnemyType.Moth) ;
-            {
-                Vector2 dir = gameObject.transform.position - collision.gameObject.transform.position;
-                //Right side will be positive, left side will be negative
-                EnemyAttack(dir);
-            }
-            
-        }
     }
 
     private void OnCollisionStay2D(Collision2D collision)
