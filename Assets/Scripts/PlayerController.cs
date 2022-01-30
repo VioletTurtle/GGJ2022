@@ -119,14 +119,21 @@ public class PlayerController : MonoBehaviour
         {
             if (collision.gameObject.GetComponent<EnemyController>().aiType == EnemyType.Moth) ;
             {
-                TurnLightOff();
+                Vector2 dir = gameObject.transform.position - collision.gameObject.transform.position;
+                //Right side will be positive, left side will be negative
+                EnemyAttack(dir);
             }
-            Vector2 dir =  gameObject.transform.position - collision.gameObject.transform.position;
-            //Right side will be positive, left side will be negative
             
-            dir.y = 5;
-
-            rigBody.AddForce(dir, ForceMode2D.Impulse);
         }
+    }
+
+    public void EnemyAttack(Vector2 dir)
+    {
+        
+
+        dir.y = 5;
+
+        rigBody.AddForce(dir, ForceMode2D.Impulse);
+        TurnLightOff();
     }
 }
