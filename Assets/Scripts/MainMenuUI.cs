@@ -12,7 +12,7 @@ public class MainMenuUI : MonoBehaviour
     public string MixerName;
     public void PlayGame()
     {
-        SceneManager.LoadScene("Test", LoadSceneMode.Single);
+        SceneManager.LoadScene("Level", LoadSceneMode.Single);
     }
     public void ExitGame()
     {
