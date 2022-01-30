@@ -804,6 +804,14 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 2895390543883938233, guid: e893d8359060e4846b4e3b55f8636695, type: 3}
+      propertyPath: m_PointLightInnerRadius
+      value: 0.32899386
+      objectReference: {fileID: 0}
+    - target: {fileID: 2895390543883938233, guid: e893d8359060e4846b4e3b55f8636695, type: 3}
+      propertyPath: m_ApplyToSortingLayers.Array.size
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 3123605032070291384, guid: e893d8359060e4846b4e3b55f8636695, type: 3}
       propertyPath: m_Name
       value: Lantern
@@ -870,6 +878,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3123605032070291387, guid: e893d8359060e4846b4e3b55f8636695, type: 3}
       propertyPath: m_WasSpriteAssigned
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5085722886183276635, guid: e893d8359060e4846b4e3b55f8636695, type: 3}
+      propertyPath: m_LocalPosition.z
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
