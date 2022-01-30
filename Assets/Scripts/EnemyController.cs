@@ -152,6 +152,7 @@ public class EnemyController : MonoBehaviour
         lr.enabled = false;
     }
 
+
  
    //timer += time, if it reaches its threshold reset it to 0, otherwise keep incrementing
 }
