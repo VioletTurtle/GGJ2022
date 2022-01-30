@@ -182,8 +182,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Exit
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: b98472c50a0cb5c458112318224bfeb9, type: 2}
-  m_sharedMaterial: {fileID: 6548610829411037140, guid: b98472c50a0cb5c458112318224bfeb9, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: f2ad952e534be1948ad9308843cbf924, type: 2}
+  m_sharedMaterial: {fileID: 3017185624606328283, guid: f2ad952e534be1948ad9308843cbf924, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -207,8 +207,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 55
-  m_fontSizeBase: 55
+  m_fontSize: 75
+  m_fontSizeBase: 75
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -422,7 +422,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 981767262}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1850759342}
+        m_TargetAssemblyTypeName: MainMenuUI, Assembly-CSharp
+        m_MethodName: ExitGame
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &981767262
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -520,8 +532,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Options
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: b98472c50a0cb5c458112318224bfeb9, type: 2}
-  m_sharedMaterial: {fileID: 6548610829411037140, guid: b98472c50a0cb5c458112318224bfeb9, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: f2ad952e534be1948ad9308843cbf924, type: 2}
+  m_sharedMaterial: {fileID: 3017185624606328283, guid: f2ad952e534be1948ad9308843cbf924, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -545,8 +557,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 55
-  m_fontSizeBase: 55
+  m_fontSize: 75
+  m_fontSizeBase: 75
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -654,8 +666,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Play
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: b98472c50a0cb5c458112318224bfeb9, type: 2}
-  m_sharedMaterial: {fileID: 6548610829411037140, guid: b98472c50a0cb5c458112318224bfeb9, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: f2ad952e534be1948ad9308843cbf924, type: 2}
+  m_sharedMaterial: {fileID: 3017185624606328283, guid: f2ad952e534be1948ad9308843cbf924, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -679,8 +691,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 55
-  m_fontSizeBase: 55
+  m_fontSize: 75
+  m_fontSizeBase: 75
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -941,6 +953,7 @@ GameObject:
   - component: {fileID: 1850759340}
   - component: {fileID: 1850759339}
   - component: {fileID: 1850759338}
+  - component: {fileID: 1850759342}
   m_Layer: 5
   m_Name: MainMenuCanvas
   m_TagString: Untagged
@@ -1029,6 +1042,18 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &1850759342
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1850759337}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b4562ed443877c498b4636257502541, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1869449116
 GameObject:
   m_ObjectHideFlags: 0
@@ -1112,13 +1137,13 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1850759337}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: 
+      - m_Target: {fileID: 1850759342}
+        m_TargetAssemblyTypeName: MainMenuUI, Assembly-CSharp
+        m_MethodName: PlayGame
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -1196,8 +1221,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
-  m_AnchoredPosition: {x: 200, y: 350}
-  m_SizeDelta: {x: 350, y: 150}
+  m_AnchoredPosition: {x: 200, y: 372.77063}
+  m_SizeDelta: {x: 589.4928, y: 195.5413}
   m_Pivot: {x: 0, y: 0.5}
 --- !u!114 &1939791056
 MonoBehaviour:
@@ -1219,7 +1244,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Title
+  m_text: Tread Lightly
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: b98472c50a0cb5c458112318224bfeb9, type: 2}
   m_sharedMaterial: {fileID: 6548610829411037140, guid: b98472c50a0cb5c458112318224bfeb9, type: 2}
@@ -1246,7 +1271,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 76.15
+  m_fontSize: 72
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1

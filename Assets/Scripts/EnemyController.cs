@@ -13,9 +13,11 @@ public class EnemyController : MonoBehaviour
     private Transform player;
     public float speed;
     int waypointIndex = 0;
-    float frogAttackTimer = 1f;
+    float frogAttackTimer = 2f;
     public List<Transform> waypoints;
     bool attackReady = true;
+    GameObject tongueTip;
+    public LineRenderer lr;
     // Start is called before the first frame update
     void Start()
     {
@@ -23,6 +25,7 @@ public class EnemyController : MonoBehaviour
         {
             player = GameObject.Find("Player").GetComponent<Transform>();
         }
+        lr = gameObject.GetComponent<LineRenderer>();
     }
 
     // Update is called once per frame
@@ -84,8 +87,9 @@ public class EnemyController : MonoBehaviour
         {
             if (attackReady == true)
             {
+                Debug.Log("Frog consider blep");
                 attackReady = false;
-                Invoke("FrogAttack", 2);
+                Invoke("FrogAttack", frogAttackTimer);
             }
             //get light source
             //run a countdown/coroutine, if it finishes the frog will attack the light source/player with its tongue
@@ -118,14 +122,24 @@ public class EnemyController : MonoBehaviour
     public void ReactToLight()
     {
         aiBehavior = Behaviors.Attack;
-        
     }
 
     void FrogAttack()
     {
         Debug.Log("Frog go blep");
+        
+        lr.SetPosition(0, gameObject.transform.position);
+        lr.SetPosition(1, player.transform.position);
         attackReady = true;
+        StartCoroutine("RemoveTongue");
+        player.gameObject.GetComponent<PlayerController>().EnemyAttack(new Vector2(0, 5));
     }
 
+    IEnumerator RemoveTongue()
+    {
+        lr.enabled = true;
+        yield return new WaitForSeconds(0.5f);
+        lr.enabled = false;
+    }
    //timer += time, if it reaches its threshold reset it to 0, otherwise keep incrementing
 }
