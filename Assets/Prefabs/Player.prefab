@@ -183,7 +183,7 @@ MonoBehaviour:
   jumpHeight: 35
   isGrounded: 0
   isFalling: 0
-  fallTimer: 1.2
+  fallTimer: 1
   lampOn: 0
   animScript: {fileID: 3154077196080811772}
 --- !u!114 &259667226

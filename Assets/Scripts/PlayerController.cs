@@ -22,6 +22,9 @@ public class PlayerController : MonoBehaviour
     private LanternRaycast lantray;
 
     public AnimationScript animScript;
+
+    private GameObject currentPlatform;
+    private Vector3 platformOffset;
  
     // Start is called before the first frame update
     void Start()
@@ -70,8 +73,6 @@ public class PlayerController : MonoBehaviour
     {
         float moveX = Input.GetAxis("Horizontal") * Speed;
         rigBody.velocity = new Vector2((rigBody.velocity.x + moveX) * friction, rigBody.velocity.y); //adding fake friction
-
-        //rigBody.velocity = new Vector2(moveX, rigBody.velocity.y);
     }
 
     void Jump()
@@ -111,6 +112,8 @@ public class PlayerController : MonoBehaviour
     private void FixedUpdate()
     {
         isGrounded = false;
+        currentPlatform = null;
+        gameObject.transform.parent = null;
         animScript.UpdateJump(!isGrounded); //call whenever isgrounded is updated
     }
     void OnCollisionEnter2D(Collision2D collision)
@@ -118,13 +121,7 @@ public class PlayerController : MonoBehaviour
         
         if (collision.gameObject.tag == "Ground")
         {
-            if (CheckGround(collision.contacts))
-            {
-                isGrounded = true;
-                timeInAir = 0;
-                isFalling = false;
-                animScript.UpdateJump(!isGrounded); //call whenever isgrounded is updated
-            }
+            CheckGround(collision.contacts, collision);
         }
         
 
@@ -144,13 +141,7 @@ public class PlayerController : MonoBehaviour
     {
         if (collision.gameObject.tag == "Ground")
         {
-            if (CheckGround(collision.contacts))
-            {
-                isGrounded = true;
-                timeInAir = 0;
-                isFalling = false;
-                animScript.UpdateJump(!isGrounded); //call whenever isgrounded is updated
-            }
+            CheckGround(collision.contacts, collision);
         }
     }
 
@@ -162,8 +153,9 @@ public class PlayerController : MonoBehaviour
         TurnLightOff();
     }
 
-    private bool CheckGround(ContactPoint2D[] contacts)
+    private void CheckGround(ContactPoint2D[] contacts, Collision2D collision)
     {
+        isGrounded = false;
         foreach (ContactPoint2D cp in contacts)
         {
             //Debug.Log(cp.normal);
@@ -171,10 +163,23 @@ public class PlayerController : MonoBehaviour
             if (cp.normal.y >= 0.9)
             {
                 Debug.DrawRay(cp.point, cp.normal, Color.green);
-                return true;
+                isGrounded = true;
             }
         }
 
-        return false;
+        if (isGrounded)
+        {
+            timeInAir = 0;
+            isFalling = false;
+            animScript.UpdateJump(!isGrounded); //call whenever isgrounded is updated
+
+            if (currentPlatform == null && collision.gameObject.GetComponentInChildren<PlatformMovement>() != null)
+            {
+                currentPlatform = collision.gameObject.GetComponentInChildren<PlatformMovement>().gameObject;
+                //Debug.LogWarning("setting parent to platform");
+                gameObject.transform.SetParent(currentPlatform.transform, true); //WARNING this gets set every physics frame but whatever
+                //platformOffset = currentPlatform.transform.position - transform.position;
+            }
+        }
     }
 }
