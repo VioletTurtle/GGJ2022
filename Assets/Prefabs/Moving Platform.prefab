@@ -70,6 +70,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3fedccae80a125f4d9297564899a6a29, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  colliding: 0
 --- !u!1 &4241787939449634318
 GameObject:
   m_ObjectHideFlags: 0
@@ -252,6 +253,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 96d5a38b172bf4440bb486a3a4907d0a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  turnoffDelay: 0.75
+  platformOn: 0
 --- !u!114 &273899324585675781
 MonoBehaviour:
   m_ObjectHideFlags: 0

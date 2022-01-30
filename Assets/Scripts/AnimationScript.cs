@@ -17,6 +17,7 @@ public class AnimationScript : MonoBehaviour
 
     float angle;
     int spriteIndex;
+    bool lanternOpen;
 
     //---Legs---
     public Animator legAnims;
@@ -96,7 +97,7 @@ public class AnimationScript : MonoBehaviour
         //remap the angle to a number in the index
         spriteIndex = Mathf.RoundToInt(Mathf.Lerp(0, 7, angle / 360));
 
-        if (blink)
+        if (blink || !lanternOpen)
         {
             eyesSprite.sprite = fuzz ? blinkSprite1 : blinkSprite2;
         }
@@ -119,7 +120,8 @@ public class AnimationScript : MonoBehaviour
 
     public void UpdateLanternSprite(bool on)
     {
-        if (on)
+        lanternOpen = on;
+        if (lanternOpen)
         {
             openSprite.enabled = true;
             closeSprite.enabled = false;
