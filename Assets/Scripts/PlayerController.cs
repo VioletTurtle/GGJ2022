@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Lumin;
+using UnityEngine.Experimental.Rendering.Universal;
 
 public class PlayerController : MonoBehaviour
 {
@@ -17,15 +17,20 @@ public class PlayerController : MonoBehaviour
     public float fallTimer = .3f;
     private float timeInAir = 0f;
 
-    public GameObject lantern;
+    public bool lampOn;
+    private Light2D light2d;
+    private LanternRaycast lantray;
+
     public AnimationScript animScript;
  
     // Start is called before the first frame update
     void Start()
     {
         rigBody = GetComponent<Rigidbody2D>();
-        lantern = gameObject.transform.GetChild(0).gameObject;
-        animScript.UpdateLanternSprite(lantern.activeSelf);
+        light2d = gameObject.transform.GetChild(0).GetComponentInChildren<Light2D>();
+        lantray = GetComponentInChildren<LanternRaycast>();
+        lampOn = true;
+        ToggleLight(false);
     }
 
     // Update is called once per frame
@@ -33,41 +38,40 @@ public class PlayerController : MonoBehaviour
     {
         Move();
         Jump();
-        ToggleLight();
+        if (Input.GetKeyDown(KeyCode.Mouse0))
+            ToggleLight(!lampOn);
+        
         AirborneMath();
     }
 
-    private void FixedUpdate()
+    private void ToggleLight(bool on)
     {
-        
-    }
-
-    public void ToggleLight()
-    {
-        if (!isFalling && Input.GetKeyDown(KeyCode.Mouse0))
+        if (!lampOn && !isFalling && on)
         {
-            lantern.SetActive(!lantern.activeSelf);
-            animScript.UpdateLanternSprite(lantern.activeSelf);
+            lampOn = true;
+            light2d.enabled = lampOn;
+            lantray.enabled = lampOn;
+            animScript.UpdateLanternSprite(lampOn);
+        }
+        if(lampOn && !on)
+        {
+            lampOn = false;
+            light2d.enabled = lampOn;
+            lantray.enabled = lampOn;
+            animScript.UpdateLanternSprite(lampOn);
         }
     }
 
     public void TurnLightOff()
     {
-        if (lantern.activeSelf)
-        {
-            lantern.SetActive(false);
-        }
-
-        Debug.LogWarning("Updating lantern on/off: " + lantern.activeSelf);
-        animScript.UpdateLanternSprite(lantern.activeSelf);
+        ToggleLight(false);
     }
     void Move()
     {
         float moveX = Input.GetAxis("Horizontal") * Speed;
-        if (isGrounded) //apply fake friction
-            rigBody.velocity = new Vector2(rigBody.velocity.x * friction, rigBody.velocity.y);;
+        rigBody.velocity = new Vector2((rigBody.velocity.x + moveX) * friction, rigBody.velocity.y); //adding fake friction
 
-        rigBody.velocity = new Vector2(moveX, rigBody.velocity.y);
+        //rigBody.velocity = new Vector2(moveX, rigBody.velocity.y);
     }
 
     void Jump()
@@ -104,31 +108,24 @@ public class PlayerController : MonoBehaviour
             }
         }
     }
-
-    public void OnCollisionExit2D(Collision2D collision)
+    private void FixedUpdate()
     {
-        if(collision.gameObject.tag == "Ground")
-        {
-            isGrounded = false; 
-            animScript.UpdateJump(!isGrounded); //call whenever isgrounded is updated
-        }
+        isGrounded = false;
+        animScript.UpdateJump(!isGrounded); //call whenever isgrounded is updated
     }
-    public void OnCollisionEnter2D(Collision2D collision)
+    void OnCollisionEnter2D(Collision2D collision)
     {
         
         if (collision.gameObject.tag == "Ground")
         {
-            Vector3 dir = collision.gameObject.transform.position - gameObject.transform.position;
-            //Debug.Log(dir.y);
-            if(dir.y <= 0)
+            if (CheckGround(collision.contacts))
             {
                 isGrounded = true;
                 timeInAir = 0;
-                isFalling = false; 
+                isFalling = false;
                 animScript.UpdateJump(!isGrounded); //call whenever isgrounded is updated
             }
         }
-
         
 
         if(collision.gameObject.tag == "Enemy")//If hit by enemy tagged object, knockback
@@ -143,13 +140,41 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    private void OnCollisionStay2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag == "Ground")
+        {
+            if (CheckGround(collision.contacts))
+            {
+                isGrounded = true;
+                timeInAir = 0;
+                isFalling = false;
+                animScript.UpdateJump(!isGrounded); //call whenever isgrounded is updated
+            }
+        }
+    }
+
     public void EnemyAttack(Vector2 dir)
     {
-        
-
         dir.y = 5;
 
         rigBody.AddForce(dir, ForceMode2D.Impulse);
         TurnLightOff();
+    }
+
+    private bool CheckGround(ContactPoint2D[] contacts)
+    {
+        foreach (ContactPoint2D cp in contacts)
+        {
+            //Debug.Log(cp.normal);
+            Debug.DrawRay(cp.point, cp.normal);
+            if (cp.normal.y >= 0.9)
+            {
+                Debug.DrawRay(cp.point, cp.normal, Color.green);
+                return true;
+            }
+        }
+
+        return false;
     }
 }
