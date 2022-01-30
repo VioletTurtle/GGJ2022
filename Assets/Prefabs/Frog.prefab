@@ -197,6 +197,7 @@ GameObject:
   - component: {fileID: 5534887374355510301}
   - component: {fileID: 5534887374355510753}
   - component: {fileID: 632273951784594140}
+  - component: {fileID: 1233518292150751894}
   m_Layer: 0
   m_Name: Frog
   m_TagString: Enemy
@@ -384,3 +385,19 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 181b9b5f3df8b9341af51162a47162d6, type: 3}
   - {fileID: 21300000, guid: cae1d9fe292ea51429532353f93b278b, type: 3}
   sleeping: 0
+--- !u!58 &1233518292150751894
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5534887374355510300}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0.2}
+  serializedVersion: 2
+  m_Radius: 1
