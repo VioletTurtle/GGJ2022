@@ -25,6 +25,7 @@ public class PlayerController : MonoBehaviour
 
     private GameObject currentPlatform;
     private Vector3 platformOffset;
+    private setCursor cursorScript;
  
     // Start is called before the first frame update
     void Start()
@@ -32,6 +33,9 @@ public class PlayerController : MonoBehaviour
         rigBody = GetComponent<Rigidbody2D>();
         light2d = gameObject.transform.GetChild(0).GetComponentInChildren<Light2D>();
         lantray = GetComponentInChildren<LanternRaycast>();
+        cursorScript = GetComponent<setCursor>();
+
+
         lampOn = true;
         ToggleLight(false);
     }
@@ -55,6 +59,7 @@ public class PlayerController : MonoBehaviour
             light2d.enabled = lampOn;
             lantray.enabled = lampOn;
             animScript.UpdateLanternSprite(lampOn);
+            cursorScript.UpdateCursor(setCursor.CursorType.reticleOn);
         }
         if(lampOn && !on)
         {
@@ -62,6 +67,7 @@ public class PlayerController : MonoBehaviour
             light2d.enabled = lampOn;
             lantray.enabled = lampOn;
             animScript.UpdateLanternSprite(lampOn);
+            cursorScript.UpdateCursor(setCursor.CursorType.reticleOff);
         }
     }
 
@@ -139,6 +145,8 @@ public class PlayerController : MonoBehaviour
 
         rigBody.AddForce(dir, ForceMode2D.Impulse);
         TurnLightOff();
+        isFalling = true;
+        cursorScript.UpdateCursor(setCursor.CursorType.reticleDisabled);
     }
 
     private void CheckGround(ContactPoint2D[] contacts, Collision2D collision)
@@ -159,6 +167,10 @@ public class PlayerController : MonoBehaviour
         {
             timeInAir = 0;
             isFalling = false;
+            if (!lampOn) //change the reticle from X to off
+            {
+                cursorScript.UpdateCursor(setCursor.CursorType.reticleOff);
+            }
             animScript.UpdateJump(!isGrounded); //call whenever isgrounded is updated
 
             if (currentPlatform == null && collision.gameObject.GetComponentInChildren<PlatformMovement>() != null)
