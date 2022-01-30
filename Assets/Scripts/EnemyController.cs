@@ -26,7 +26,7 @@ public class EnemyController : MonoBehaviour
 
     private AudioSource aSource;
     public AudioClip tongueOut;
-    //public AudioClip tongueIn;
+    public AudioClip tongueIn;
 
     // Start is called before the first frame update
     void Start()
@@ -190,8 +190,8 @@ public class EnemyController : MonoBehaviour
     {
         lr.enabled = true;
         yield return new WaitForSeconds(0.5f);
-        //aSource.clip = tongueIn;
-        //aSource.Play();
+        aSource.clip = tongueIn;
+        aSource.Play();
         lr.enabled = false;
     }
 
