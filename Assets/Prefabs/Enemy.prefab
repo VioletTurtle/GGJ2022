@@ -145,9 +145,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   aiBehavior: 0
+  aiType: 0
   speed: 5
   waypoints:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
+  lr: {fileID: 0}
+  FrogMaxTime: 0.5

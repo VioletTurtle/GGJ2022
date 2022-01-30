@@ -661,7 +661,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1097312715362066221, guid: c95edae8ba0a4684d9f9c286afa74e97, type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 1097312715362066221, guid: c95edae8ba0a4684d9f9c286afa74e97, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1614,7 +1614,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &886494502
 MonoBehaviour:
@@ -2997,9 +2997,13 @@ PrefabInstance:
       propertyPath: m_Name
       value: Frog
       objectReference: {fileID: 0}
+    - target: {fileID: 5534887374355510302, guid: ebf2f11d0ccb75845b4c6db4ec9f52bf, type: 3}
+      propertyPath: FrogMaxTime
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5534887374355510752, guid: ebf2f11d0ccb75845b4c6db4ec9f52bf, type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 5534887374355510752, guid: ebf2f11d0ccb75845b4c6db4ec9f52bf, type: 3}
       propertyPath: m_LocalPosition.x
@@ -3115,6 +3119,10 @@ PrefabInstance:
     - target: {fileID: 5534887374355510300, guid: ebf2f11d0ccb75845b4c6db4ec9f52bf, type: 3}
       propertyPath: m_Name
       value: Frog (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5534887374355510302, guid: ebf2f11d0ccb75845b4c6db4ec9f52bf, type: 3}
+      propertyPath: FrogMaxTime
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5534887374355510752, guid: ebf2f11d0ccb75845b4c6db4ec9f52bf, type: 3}
       propertyPath: m_RootOrder
@@ -3713,6 +3721,10 @@ PrefabInstance:
     - target: {fileID: 5534887374355510300, guid: ebf2f11d0ccb75845b4c6db4ec9f52bf, type: 3}
       propertyPath: m_Name
       value: Frog
+      objectReference: {fileID: 0}
+    - target: {fileID: 5534887374355510302, guid: ebf2f11d0ccb75845b4c6db4ec9f52bf, type: 3}
+      propertyPath: FrogMaxTime
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5534887374355510752, guid: ebf2f11d0ccb75845b4c6db4ec9f52bf, type: 3}
       propertyPath: m_RootOrder
