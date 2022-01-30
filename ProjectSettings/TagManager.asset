@@ -7,6 +7,7 @@ TagManager:
   - Ground
   - Enemy
   - PlatformChild
+  - WinDetect
   layers:
   - Default
   - TransparentFX
@@ -43,6 +44,9 @@ TagManager:
   m_SortingLayers:
   - name: Background
     uniqueID: 3327946283
+    locked: 0
+  - name: Props
+    uniqueID: 473592555
     locked: 0
   - name: Default
     uniqueID: 0

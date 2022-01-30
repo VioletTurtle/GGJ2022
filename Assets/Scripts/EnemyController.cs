@@ -18,6 +18,12 @@ public class EnemyController : MonoBehaviour
     bool attackReady = true;
     GameObject tongueTip;
     public LineRenderer lr;
+    float timer;
+    public float FrogMaxTime = 2f;
+
+    private MothAnims mothAnimate;
+    private FrogAnimations frogAnimate;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -26,6 +32,15 @@ public class EnemyController : MonoBehaviour
             player = GameObject.Find("Player").GetComponent<Transform>();
         }
         lr = gameObject.GetComponent<LineRenderer>();
+
+        if (aiType == EnemyType.Moth)
+        {
+            mothAnimate = GetComponentInChildren<MothAnims>();
+        }
+        if (aiType == EnemyType.Frog)
+        {
+            frogAnimate = GetComponentInChildren<FrogAnimations>();
+        }
     }
 
     // Update is called once per frame
@@ -72,6 +87,17 @@ public class EnemyController : MonoBehaviour
         {
             aiBehavior = Behaviors.Patrol;
         }
+        if (aiType == EnemyType.Frog)
+        {
+            timer = Mathf.Clamp(timer - Time.deltaTime, 0, FrogMaxTime);
+            frogAnimate.UpdateSpriteIndex(timer, FrogMaxTime);
+
+            if (timer <= 0)
+            {
+                if (!frogAnimate.sleeping)
+                    frogAnimate.UpdateSleep(true);
+            }
+        }
     }
     void Attack()
     {
@@ -82,21 +108,31 @@ public class EnemyController : MonoBehaviour
             Transform target = player.transform;
             transform.position = Vector2.MoveTowards(transform.position, target.position, speed * Time.deltaTime);
 
+            mothAnimate.right = (target.position - transform.position).normalized.x > 0 ? true : false;
+
         }
         if (aiType == EnemyType.Frog)
         {
-            if (attackReady == true)
+            timer = Mathf.Clamp(timer + Time.deltaTime, 0, FrogMaxTime);
+            frogAnimate.UpdateSpriteIndex(timer, FrogMaxTime);
+
+            if(frogAnimate.sleeping)
+                frogAnimate.UpdateSleep(false);
+
+            Debug.Log(timer);
+            if (timer >= FrogMaxTime)
             {
-                Debug.Log("Frog consider blep");
-                attackReady = false;
-                Invoke("FrogAttack", frogAttackTimer);
+                if (attackReady == true)
+                {
+                    Debug.Log("Frog consider blep");
+                    attackReady = false;
+                    FrogAttack();
+                }
             }
             //get light source
             //run a countdown/coroutine, if it finishes the frog will attack the light source/player with its tongue
-
         }
-        //While in light move to towards its source
-        //On contact with the player knock them back
+        
     }
 
     void Patrol()
@@ -116,12 +152,19 @@ public class EnemyController : MonoBehaviour
                     waypointIndex++;
                 
             }
-;        }
+
+            mothAnimate.right = (targetPosition - transform.position).normalized.x > 0 ? true : false;
+        }
     }
 
     public void ReactToLight()
     {
         aiBehavior = Behaviors.Attack;
+        
+        //Check for a boolean value to tell if a timer is already started
+        //If one isn't started start a new one and set the bool to false
+        //keep track of the time difference, once it hits a certain time difference it will trigger an attack and then
+        //reset itself to take a new starting time. 
     }
 
     void FrogAttack()
@@ -141,5 +184,8 @@ public class EnemyController : MonoBehaviour
         yield return new WaitForSeconds(0.5f);
         lr.enabled = false;
     }
+
+
+ 
    //timer += time, if it reaches its threshold reset it to 0, otherwise keep incrementing
 }

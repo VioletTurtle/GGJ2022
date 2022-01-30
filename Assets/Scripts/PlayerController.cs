@@ -1,14 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Lumin;
+using UnityEngine.Experimental.Rendering.Universal;
 
 public class PlayerController : MonoBehaviour
 {
     Rigidbody2D rigBody;
     public float Speed = 5;
-    public float jumpSpeed = 20f;
-    [HideInInspector]
+    public float friction = 0.2f;
+    //public float jumpSpeed = 300f;
+    public float jumpHeight = 1f;
     public bool isGrounded = false;
     [HideInInspector]
     public bool isFalling = false;
@@ -16,14 +17,23 @@ public class PlayerController : MonoBehaviour
     public float fallTimer = .3f;
     private float timeInAir = 0f;
 
-    public GameObject lantern;
-    
+    public bool lampOn;
+    private Light2D light2d;
+    private LanternRaycast lantray;
+
+    public AnimationScript animScript;
+
+    private GameObject currentPlatform;
+    private Vector3 platformOffset;
  
     // Start is called before the first frame update
     void Start()
     {
         rigBody = GetComponent<Rigidbody2D>();
-        lantern = gameObject.transform.GetChild(0).gameObject;
+        light2d = gameObject.transform.GetChild(0).GetComponentInChildren<Light2D>();
+        lantray = GetComponentInChildren<LanternRaycast>();
+        lampOn = true;
+        ToggleLight(false);
     }
 
     // Update is called once per frame
@@ -31,35 +41,38 @@ public class PlayerController : MonoBehaviour
     {
         Move();
         Jump();
-        ToggleLight();
+        if (Input.GetKeyDown(KeyCode.Mouse0))
+            ToggleLight(!lampOn);
+        
         AirborneMath();
     }
 
-    private void FixedUpdate()
+    private void ToggleLight(bool on)
     {
-        
-    }
-
-    public void ToggleLight()
-    {
-        if (!isFalling && Input.GetKeyDown(KeyCode.Mouse0))
+        if (!lampOn && !isFalling && on)
         {
-            lantern.SetActive(!lantern.activeSelf);
+            lampOn = true;
+            light2d.enabled = lampOn;
+            lantray.enabled = lampOn;
+            animScript.UpdateLanternSprite(lampOn);
+        }
+        if(lampOn && !on)
+        {
+            lampOn = false;
+            light2d.enabled = lampOn;
+            lantray.enabled = lampOn;
+            animScript.UpdateLanternSprite(lampOn);
         }
     }
 
     public void TurnLightOff()
     {
-        if (lantern.activeSelf)
-        {
-            lantern.SetActive(false);
-        }
+        ToggleLight(false);
     }
     void Move()
     {
-        float hor = Input.GetAxis("Horizontal");
-        float moveBy = hor * Speed;
-        rigBody.velocity = new Vector2(moveBy, rigBody.velocity.y);
+        float moveX = Input.GetAxis("Horizontal") * Speed;
+        rigBody.velocity = new Vector2((rigBody.velocity.x + moveX) * friction, rigBody.velocity.y); //adding fake friction
     }
 
     void Jump()
@@ -68,10 +81,12 @@ public class PlayerController : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.Space))
             {
-                
-                rigBody.AddForce(transform.up * jumpSpeed);
+                //V = Square root of (2 g h)
+                float jumpImpulse = Mathf.Sqrt(2 * rigBody.gravityScale * jumpHeight);
+                rigBody.AddForce(transform.up * jumpImpulse, ForceMode2D.Impulse);
+                //rigBody.AddForce(transform.up * jumpSpeed, ForceMode2D.Impulse);
                 isGrounded = false;
-                startingTime = Time.time;
+                //startingTime = Time.time; //Replace with Time.deltaTime;
 
             }
         }
@@ -81,38 +96,33 @@ public class PlayerController : MonoBehaviour
     {
         if (!isGrounded)
         {
-            timeInAir += Time.time - startingTime;
-            if (timeInAir >= fallTimer)
+            if(rigBody.velocity.y < 0f) //only start counting down air timer when moving down
+                timeInAir += Time.deltaTime; //replace from Time.time - starting
+
+            //Debug.Log("time in air: " + timeInAir);
+
+            if (timeInAir >= fallTimer) 
             {
                 isFalling = true;
-                
-                lantern.SetActive(false);
+
+                TurnLightOff();
             }
         }
     }
-
-    public void OnCollisionExit2D(Collision2D collision)
+    private void FixedUpdate()
     {
-        if(collision.gameObject.tag == "Ground")
-        {
-            isGrounded = false;
-        }
+        isGrounded = false;
+        currentPlatform = null;
+        gameObject.transform.parent = null;
+        animScript.UpdateJump(!isGrounded); //call whenever isgrounded is updated
     }
-    public void OnCollisionEnter2D(Collision2D collision)
+    void OnCollisionEnter2D(Collision2D collision)
     {
         
         if (collision.gameObject.tag == "Ground")
         {
-            Vector3 dir = collision.gameObject.transform.position - gameObject.transform.position;
-            Debug.Log(dir.y);
-            if(dir.y <= 0)
-            {
-                isGrounded = true;
-                timeInAir = 0;
-                isFalling = false;
-            }
+            CheckGround(collision.contacts, collision);
         }
-
         
 
         if(collision.gameObject.tag == "Enemy")//If hit by enemy tagged object, knockback
@@ -127,13 +137,49 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    private void OnCollisionStay2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag == "Ground")
+        {
+            CheckGround(collision.contacts, collision);
+        }
+    }
+
     public void EnemyAttack(Vector2 dir)
     {
-        
-
         dir.y = 5;
 
         rigBody.AddForce(dir, ForceMode2D.Impulse);
         TurnLightOff();
+    }
+
+    private void CheckGround(ContactPoint2D[] contacts, Collision2D collision)
+    {
+        isGrounded = false;
+        foreach (ContactPoint2D cp in contacts)
+        {
+            //Debug.Log(cp.normal);
+            Debug.DrawRay(cp.point, cp.normal);
+            if (cp.normal.y >= 0.9)
+            {
+                Debug.DrawRay(cp.point, cp.normal, Color.green);
+                isGrounded = true;
+            }
+        }
+
+        if (isGrounded)
+        {
+            timeInAir = 0;
+            isFalling = false;
+            animScript.UpdateJump(!isGrounded); //call whenever isgrounded is updated
+
+            if (currentPlatform == null && collision.gameObject.GetComponentInChildren<PlatformMovement>() != null)
+            {
+                currentPlatform = collision.gameObject.GetComponentInChildren<PlatformMovement>().gameObject;
+                //Debug.LogWarning("setting parent to platform");
+                gameObject.transform.SetParent(currentPlatform.transform, true); //WARNING this gets set every physics frame but whatever
+                //platformOffset = currentPlatform.transform.position - transform.position;
+            }
+        }
     }
 }
