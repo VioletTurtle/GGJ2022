@@ -32,7 +32,11 @@ public class LanternRaycast : MonoBehaviour
                 GameObject hitObject = rayHit.collider.gameObject;
                 if (hitObject.CompareTag("PlatformChild"))
                 {
-                    hitObject.GetComponentInParent<PlatformBasicController>().TurnOn();
+                    if(hitObject.GetComponentInParent<PlatformBasicController>() != null)
+                        hitObject.GetComponentInParent<PlatformBasicController>().TurnOn();
+
+                    if (hitObject.transform.parent.GetComponentInParent<PlatformBasicController>() != null)
+                        hitObject.transform.parent.GetComponentInParent<PlatformBasicController>().TurnOn();
                 }
                 //Add code here for enemy tag
                 if (hitObject.CompareTag("Enemy"))

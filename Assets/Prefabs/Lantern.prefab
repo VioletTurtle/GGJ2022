@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 5085722886183276635}
   - component: {fileID: 2895390543883938233}
-  - component: {fileID: 4061679544619556160}
   m_Layer: 0
   m_Name: Light Holder
   m_TagString: Untagged
@@ -60,7 +59,7 @@ MonoBehaviour:
   m_PointLightInnerAngle: 20
   m_PointLightOuterAngle: 20
   m_PointLightInnerRadius: 12
-  m_PointLightOuterRadius: 12
+  m_PointLightOuterRadius: 30
   m_PointLightDistance: 3
   m_PointLightQuality: 1
   m_ShapeLightParametricSides: 5
@@ -73,21 +72,6 @@ MonoBehaviour:
   - {x: 0.5, y: -0.5, z: 0}
   - {x: 0.5, y: 0.5, z: 0}
   - {x: -0.5, y: 0.5, z: 0}
---- !u!114 &4061679544619556160
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2445488715100414079}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 32b0cefe9e6f257469430bc314c43dec, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  light2d: {fileID: 2895390543883938233}
-  frequency: 2
-  maxsize: 1.1
 --- !u!1 &3123605032070291384
 GameObject:
   m_ObjectHideFlags: 0
