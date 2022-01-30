@@ -69,7 +69,6 @@ public class FinalPlatform : MonoBehaviour
             tempColor.a += Time.deltaTime * 1f;
             Debug.Log(tempColor.a);
             fadeToWhite.color = tempColor;
-            
         }
         //Steadily grow light range to cover screen
     }
