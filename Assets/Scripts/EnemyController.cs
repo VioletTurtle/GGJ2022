@@ -19,8 +19,10 @@ public class EnemyController : MonoBehaviour
     GameObject tongueTip;
     public LineRenderer lr;
     float timer;
+    public float FrogMaxTime = 2f;
 
     private MothAnims mothAnimate;
+    private FrogAnimations frogAnimate;
 
     // Start is called before the first frame update
     void Start()
@@ -30,7 +32,15 @@ public class EnemyController : MonoBehaviour
             player = GameObject.Find("Player").GetComponent<Transform>();
         }
         lr = gameObject.GetComponent<LineRenderer>();
-        mothAnimate = GetComponentInChildren<MothAnims>();
+
+        if (aiType == EnemyType.Moth)
+        {
+            mothAnimate = GetComponentInChildren<MothAnims>();
+        }
+        if (aiType == EnemyType.Frog)
+        {
+            frogAnimate = GetComponentInChildren<FrogAnimations>();
+        }
     }
 
     // Update is called once per frame
@@ -73,10 +83,20 @@ public class EnemyController : MonoBehaviour
     }
     void Idle()
     {
-        timer = 0f;
         if(aiType == EnemyType.Moth)
         {
             aiBehavior = Behaviors.Patrol;
+        }
+        if (aiType == EnemyType.Frog)
+        {
+            timer = Mathf.Clamp(timer - Time.deltaTime, 0, FrogMaxTime);
+            frogAnimate.UpdateSpriteIndex(timer, FrogMaxTime);
+
+            if (timer <= 0)
+            {
+                if (!frogAnimate.sleeping)
+                    frogAnimate.UpdateSleep(true);
+            }
         }
     }
     void Attack()
@@ -93,9 +113,14 @@ public class EnemyController : MonoBehaviour
         }
         if (aiType == EnemyType.Frog)
         {
-            timer += Time.deltaTime;
+            timer = Mathf.Clamp(timer + Time.deltaTime, 0, FrogMaxTime);
+            frogAnimate.UpdateSpriteIndex(timer, FrogMaxTime);
+
+            if(frogAnimate.sleeping)
+                frogAnimate.UpdateSleep(false);
+
             Debug.Log(timer);
-            if (timer >= 2f)
+            if (timer >= FrogMaxTime)
             {
                 if (attackReady == true)
                 {
