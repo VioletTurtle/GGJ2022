@@ -18,8 +18,8 @@ public class LanternRaycast : MonoBehaviour
         {
             //Quaternion math:
             //https://answers.unity.com/questions/146975/how-to-raycast-on-45-degree.html
-            RaycastHit2D hit = Physics2D.Raycast(transform.position, Quaternion.Euler(0, 0, -10f + 2f * i) * transform.right, 12f);
-            Debug.DrawRay(transform.position, Quaternion.Euler(0, 0, -10f + 2f * i) * transform.right * 12, Color.red);
+            RaycastHit2D hit = Physics2D.Raycast(transform.position, Quaternion.Euler(0, 0, -10f + 2f * i) * transform.right, 40f);
+            Debug.DrawRay(transform.position, Quaternion.Euler(0, 0, -10f + 2f * i) * transform.right * 40, Color.red);
             hits.SetValue(hit, i);
         }
 
@@ -28,7 +28,7 @@ public class LanternRaycast : MonoBehaviour
         {
             if (rayHit.collider != null)
             {
-                //Debug.Log("Hit something");
+                //Debug.Log("Hit something: " + rayHit.collider.name);
                 GameObject hitObject = rayHit.collider.gameObject;
                 if (hitObject.CompareTag("PlatformChild"))
                 {

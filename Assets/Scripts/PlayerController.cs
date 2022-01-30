@@ -7,9 +7,9 @@ public class PlayerController : MonoBehaviour
 {
     Rigidbody2D rigBody;
     public float Speed = 5;
+    public float friction = 0.2f;
     //public float jumpSpeed = 300f;
     public float jumpHeight = 1f;
-    [HideInInspector]
     public bool isGrounded = false;
     [HideInInspector]
     public bool isFalling = false;
@@ -63,9 +63,11 @@ public class PlayerController : MonoBehaviour
     }
     void Move()
     {
-        float hor = Input.GetAxis("Horizontal");
-        float moveBy = hor * Speed;
-        rigBody.velocity = new Vector2(moveBy, rigBody.velocity.y);
+        float moveX = Input.GetAxis("Horizontal") * Speed;
+        if (isGrounded) //apply fake friction
+            rigBody.velocity = new Vector2(rigBody.velocity.x * friction, rigBody.velocity.y);;
+
+        rigBody.velocity = new Vector2(moveX, rigBody.velocity.y);
     }
 
     void Jump()

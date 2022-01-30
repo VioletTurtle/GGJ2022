@@ -7,6 +7,7 @@ public class PlatformBasicController : MonoBehaviour
     private float turnoffDelay = 0.75f;
     private float currDelay;
     public bool platformOn = false;
+    public bool debug;
 
     private BoxCollider2D col;
     private SpriteRenderer sr;
@@ -29,10 +30,12 @@ public class PlatformBasicController : MonoBehaviour
     {
         if (platformOn)
         {
+            if (debug)
+                Debug.Log(currDelay);
+
             currDelay -= Time.deltaTime;
             if (currDelay <= 0f)
                 TurnOff();
-
         }
     }
 

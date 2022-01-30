@@ -13,7 +13,7 @@ public class PlatformFallTrigger : MonoBehaviour
     //}
     private void FixedUpdate()
     {
-        colliding = false;
+        //colliding = false;
     }
     private void OnTriggerEnter2D(Collider2D other)
     {
@@ -34,5 +34,14 @@ public class PlatformFallTrigger : MonoBehaviour
             //other.gameObject.GetComponent<PlayerController>().TurnLightOff();
             //other.gameObject.GetComponent<PlayerController>().isFalling = true;
         }
+    }
+
+    private void OnTriggerExit2D(Collider2D other)
+    {
+        if (other.gameObject.name == "Player")
+        {
+            colliding = false;
+        }
+
     }
 }

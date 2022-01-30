@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3090095600225740085}
   m_Layer: 0
   m_Name: Platform
-  m_TagString: Ground
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -144,7 +144,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.64, y: 0.33}
+  m_Size: {x: 0.63, y: 0.32}
   m_EdgeRadius: 0
 --- !u!114 &7477666170780118442
 MonoBehaviour:
@@ -174,7 +174,7 @@ GameObject:
   - component: {fileID: 735436646027809205}
   m_Layer: 0
   m_Name: PlatformSprite
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

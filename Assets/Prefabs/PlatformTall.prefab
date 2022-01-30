@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3090095600225740085}
   m_Layer: 0
   m_Name: PlatformTall
-  m_TagString: Ground
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -144,7 +144,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.24, y: 0.64}
+  m_Size: {x: 0.23, y: 0.63}
   m_EdgeRadius: 0
 --- !u!114 &7477666170780118442
 MonoBehaviour:
@@ -171,9 +171,10 @@ GameObject:
   - component: {fileID: 289598321345496945}
   - component: {fileID: 6575680316230180275}
   - component: {fileID: 6893520062084240882}
+  - component: {fileID: 6208122651922959506}
   m_Layer: 0
   m_Name: PlatformSprite
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -293,6 +294,19 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &6208122651922959506
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3854381898427594207}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 96d5a38b172bf4440bb486a3a4907d0a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  platformOn: 0
 --- !u!1001 &4543251139949127224
 PrefabInstance:
   m_ObjectHideFlags: 0
