@@ -7,7 +7,8 @@ public class PlayerController : MonoBehaviour
 {
     Rigidbody2D rigBody;
     public float Speed = 5;
-    public float jumpSpeed = 20f;
+    //public float jumpSpeed = 300f;
+    public float jumpHeight = 1f;
     [HideInInspector]
     public bool isGrounded = false;
     [HideInInspector]
@@ -17,13 +18,14 @@ public class PlayerController : MonoBehaviour
     private float timeInAir = 0f;
 
     public GameObject lantern;
-    
+    public AnimationScript animScript;
  
     // Start is called before the first frame update
     void Start()
     {
         rigBody = GetComponent<Rigidbody2D>();
         lantern = gameObject.transform.GetChild(0).gameObject;
+        animScript.UpdateLanternSprite(lantern.activeSelf);
     }
 
     // Update is called once per frame
@@ -45,6 +47,7 @@ public class PlayerController : MonoBehaviour
         if (!isFalling && Input.GetKeyDown(KeyCode.Mouse0))
         {
             lantern.SetActive(!lantern.activeSelf);
+            animScript.UpdateLanternSprite(lantern.activeSelf);
         }
     }
 
@@ -54,6 +57,9 @@ public class PlayerController : MonoBehaviour
         {
             lantern.SetActive(false);
         }
+
+        Debug.LogWarning("Updating lantern on/off: " + lantern.activeSelf);
+        animScript.UpdateLanternSprite(lantern.activeSelf);
     }
     void Move()
     {
@@ -68,10 +74,12 @@ public class PlayerController : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.Space))
             {
-                
-                rigBody.AddForce(transform.up * jumpSpeed);
+                //V = Square root of (2 g h)
+                float jumpImpulse = Mathf.Sqrt(2 * rigBody.gravityScale * jumpHeight);
+                rigBody.AddForce(transform.up * jumpImpulse, ForceMode2D.Impulse);
+                //rigBody.AddForce(transform.up * jumpSpeed, ForceMode2D.Impulse);
                 isGrounded = false;
-                startingTime = Time.time;
+                //startingTime = Time.time; //Replace with Time.deltaTime;
 
             }
         }
@@ -81,12 +89,16 @@ public class PlayerController : MonoBehaviour
     {
         if (!isGrounded)
         {
-            timeInAir += Time.time - startingTime;
-            if (timeInAir >= fallTimer)
+            if(rigBody.velocity.y < 0f) //only start counting down air timer when moving down
+                timeInAir += Time.deltaTime; //replace from Time.time - starting
+
+            Debug.Log("time in air: " + timeInAir);
+
+            if (timeInAir >= fallTimer) 
             {
                 isFalling = true;
-                
-                lantern.SetActive(false);
+
+                TurnLightOff();
             }
         }
     }
@@ -95,7 +107,8 @@ public class PlayerController : MonoBehaviour
     {
         if(collision.gameObject.tag == "Ground")
         {
-            isGrounded = false;
+            isGrounded = false; 
+            animScript.UpdateJump(!isGrounded); //call whenever isgrounded is updated
         }
     }
     public void OnCollisionEnter2D(Collision2D collision)
@@ -104,12 +117,13 @@ public class PlayerController : MonoBehaviour
         if (collision.gameObject.tag == "Ground")
         {
             Vector3 dir = collision.gameObject.transform.position - gameObject.transform.position;
-            Debug.Log(dir.y);
+            //Debug.Log(dir.y);
             if(dir.y <= 0)
             {
                 isGrounded = true;
                 timeInAir = 0;
-                isFalling = false;
+                isFalling = false; 
+                animScript.UpdateJump(!isGrounded); //call whenever isgrounded is updated
             }
         }
 

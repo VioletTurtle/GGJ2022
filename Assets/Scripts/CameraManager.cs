@@ -11,7 +11,8 @@ public class CameraManager : MonoBehaviour
     void FixedUpdate()
     {
         Vector3 targetPos = new Vector3(transform.position.x, player.position.y + 2.5f, transform.position.z);
-        transform.position = Vector3.Lerp(transform.position, targetPos, 0.2f);
+        transform.position = targetPos;
+        //transform.position = Vector3.Lerp(transform.position, targetPos, 0.2f);
 
         if(transform.position.y >= bg2.position.y)
         {
