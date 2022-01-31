@@ -21,7 +21,7 @@ public class FinalPlatform : MonoBehaviour
     {
         SlowTime();
         GrowLight();
-        Debug.Log("Timescale = " + Time.timeScale);
+        //Debug.Log("Timescale = " + Time.timeScale);
     }
 
     private void OnCollisionStay2D(Collision2D collision)
