@@ -149,14 +149,15 @@ public class EnemyController : MonoBehaviour
             Vector3 targetPosition = waypoints[waypointIndex].position;
             float delta = speed * Time.deltaTime;
             transform.position = Vector2.MoveTowards(transform.position, targetPosition, delta);
-            if(transform.position.x == targetPosition.x && transform.position.y == targetPosition.y)
+            //if(transform.position.x == targetPosition.x && transform.position.y == targetPosition.y)
+            if ((transform.position - targetPosition).sqrMagnitude < 0.02f)
             {
                 if (waypointIndex + 1 >= waypoints.Count)
                     waypointIndex = 0;
                 else
                     waypointIndex++;
-                
             }
+            
 
             mothAnimate.right = (targetPosition - transform.position).normalized.x > 0 ? true : false;
         }
