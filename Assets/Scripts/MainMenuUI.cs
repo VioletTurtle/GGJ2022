@@ -21,7 +21,7 @@ public class MainMenuUI : MonoBehaviour
 
     public void SetVolume(float volume)
     {
-        audioMixer.SetFloat(MixerName, volume);
+        audioMixer.SetFloat(MixerName, Mathf.Log10(volume) * 20);
     }
 
     private void Start()

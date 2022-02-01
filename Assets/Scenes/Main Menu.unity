@@ -522,10 +522,10 @@ MonoBehaviour:
   m_FillRect: {fileID: 988850474}
   m_HandleRect: {fileID: 1826018606}
   m_Direction: 0
-  m_MinValue: -80
-  m_MaxValue: 0
+  m_MinValue: 0.0001
+  m_MaxValue: 5
   m_WholeNumbers: 0
-  m_Value: 0
+  m_Value: 4
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
@@ -1118,7 +1118,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Music
+  m_text: Sound
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: f2ad952e534be1948ad9308843cbf924, type: 2}
   m_sharedMaterial: {fileID: 3017185624606328283, guid: f2ad952e534be1948ad9308843cbf924, type: 2}
@@ -1181,7 +1181,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_margin: {x: 0, y: 0, z: -76.79607, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -2286,7 +2286,7 @@ MonoBehaviour:
   UnlitBack: {fileID: 1712079711}
   LitBack: {fileID: 1327613422}
   audioMixer: {fileID: 24100000, guid: 85bce4aa38329434cbed6c057d5d6c6c, type: 2}
-  MixerName: Music
+  MixerName: MusicVol
 --- !u!1 &1869449116
 GameObject:
   m_ObjectHideFlags: 0

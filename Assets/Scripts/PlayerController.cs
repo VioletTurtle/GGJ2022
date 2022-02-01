@@ -28,7 +28,10 @@ public class PlayerController : MonoBehaviour
     private setCursor cursorScript;
 
     private AudioSource aSource;
-    
+    public AudioClip soundJump;
+    public AudioClip soundOpen;
+    public AudioClip soundClose;
+
     //not an elegant solution
     //0.1 seconds to give fixed update a chance to update ground state to prvent super jump by having multiple jump inputs in one fixed update framea
     private float jumpDelayTime;
@@ -78,6 +81,8 @@ public class PlayerController : MonoBehaviour
             lantray.enabled = lampOn;
             animScript.UpdateLanternSprite(lampOn);
             cursorScript.UpdateCursor(setCursor.CursorType.reticleOn);
+            aSource.clip = soundOpen;
+            aSource.Play();
         }
         if(lampOn && !on)
         {
@@ -85,7 +90,9 @@ public class PlayerController : MonoBehaviour
             light2d.enabled = lampOn;
             lantray.enabled = lampOn;
             animScript.UpdateLanternSprite(lampOn);
-            cursorScript.UpdateCursor(setCursor.CursorType.reticleOff);
+            cursorScript.UpdateCursor(setCursor.CursorType.reticleOff); 
+            aSource.clip = soundClose;
+            aSource.Play();
         }
     }
 
@@ -103,6 +110,7 @@ public class PlayerController : MonoBehaviour
     {
         if (isGrounded && jumpDelayTime >= 0.1f)
         {
+            aSource.clip = soundJump;
             aSource.Play();
             isGrounded = false;
             jumpDelayTime = 0f;

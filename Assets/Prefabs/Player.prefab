@@ -188,6 +188,10 @@ MonoBehaviour:
   fallTimer: 1
   lampOn: 0
   animScript: {fileID: 3154077196080811772}
+  soundJump: {fileID: 8300000, guid: eaaf6a1a67cca7848a19e6332481d42f, type: 3}
+  soundOpen: {fileID: 8300000, guid: ee7c090cced7b77458d37bb125e073eb, type: 3}
+  soundClose: {fileID: 8300000, guid: c9c880a5451ec354db458f07befd9f5b, type: 3}
+  paused: 0
 --- !u!114 &259667226
 MonoBehaviour:
   m_ObjectHideFlags: 0
