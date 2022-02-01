@@ -124,7 +124,7 @@ public class EnemyController : MonoBehaviour
             if(frogAnimate.sleeping)
                 frogAnimate.UpdateSleep(false);
 
-            Debug.Log(timer);
+            //Debug.Log(timer);
             if (timer >= FrogMaxTime)
             {
                 if (attackReady == true)

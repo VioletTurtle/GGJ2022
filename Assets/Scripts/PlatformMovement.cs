@@ -16,13 +16,26 @@ public class PlatformMovement : MonoBehaviour
     void Start()
     {
         body = GetComponent<Rigidbody2D>();
+        
+        //teleport platform to first waypoint because otherwise it lerps there
+        switch (movementType)
+        {
+            case MoveType.Stationary:
+                //Nothing
+                break;
+            case MoveType.Side2Side:
+                transform.position = horWaypoints[0].position;
+                break;
+            case MoveType.UpNDown:
+                transform.position = verWaypoints[0].position;
+                break;
+        }
     }
 
     // Update is called once per frame
-    void FixedUpdate() //using fixed update to get rigidbody velocity
+    void Update()
     {
         runBehavior();
-        
     }
 
     void runBehavior()

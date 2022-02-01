@@ -17,7 +17,15 @@ public class LanternRaycast : MonoBehaviour
                 //https://answers.unity.com/questions/146975/how-to-raycast-on-45-degree.html
                 RaycastHit2D hit = Physics2D.Raycast(transform.position, Quaternion.Euler(0, 0, -10f + 2f * i) * transform.right, 40f);
 
-                Debug.DrawRay(transform.position, Quaternion.Euler(0, 0, -10f + 2f * i) * transform.right * 40, Color.red);
+                if(hit.collider != null)
+                {
+                    Debug.DrawLine(transform.position, hit.point, Color.green);
+                }
+                else
+                {
+                    Debug.DrawRay(transform.position, Quaternion.Euler(0, 0, -10f + 2f * i) * transform.right * 40, Color.red);
+                }
+
                 hits.SetValue(hit, i);
             }
 
