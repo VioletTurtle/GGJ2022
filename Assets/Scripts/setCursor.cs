@@ -39,11 +39,9 @@ public class setCursor : MonoBehaviour
             {
                 case CursorType.arrow1: //main eyes
                     Cursor.SetCursor(crosshair_main1, Vector2.zero, CursorMode.Auto);
-                    blink = true;
                     break;
                 case CursorType.arrow2: //main blink
                     Cursor.SetCursor(crosshair_main2, Vector2.zero, CursorMode.Auto);
-                    blink = true;
                     break;
                 case CursorType.reticleOn: //on
                     Cursor.SetCursor(crosshair_on, cursorOffset, CursorMode.Auto);
@@ -69,11 +67,11 @@ public class setCursor : MonoBehaviour
         {
             if (blink)
             {
-                UpdateCursor(CursorType.arrow1);
+                UpdateCursor(CursorType.arrow2);
             }
             else
             {
-                UpdateCursor(CursorType.arrow2);
+                UpdateCursor(CursorType.arrow1);
             }
         }
     }

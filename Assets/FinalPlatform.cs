@@ -21,7 +21,7 @@ public class FinalPlatform : MonoBehaviour
     {
         SlowTime();
         GrowLight();
-        Debug.Log("Timescale = " + Time.timeScale);
+        //Debug.Log("Timescale = " + Time.timeScale);
     }
 
     private void OnCollisionStay2D(Collision2D collision)
@@ -37,13 +37,15 @@ public class FinalPlatform : MonoBehaviour
     {
         if(collision.gameObject.tag == "Player")
         {
-            //steadily slow time for a certain amount of time. 
-            slowTimeCheck = true;
-            if (GameObject.FindGameObjectWithTag("WinDetect"))
+            //steadily slow time for a certain amount of time.
+            if(collision.gameObject.GetComponent<Rigidbody2D>().velocity.y > 0f) //dont win if you just fall off platform
             {
-                GameObject.FindGameObjectWithTag("WinDetect").GetComponent<MenuImageChanger>().hasWon = true;
+                slowTimeCheck = true;
+                if (GameObject.FindGameObjectWithTag("WinDetect"))
+                {
+                    GameObject.FindGameObjectWithTag("WinDetect").GetComponent<MenuImageChanger>().hasWon = true;
+                }
             }
-            
         }
     }
 
@@ -67,7 +69,7 @@ public class FinalPlatform : MonoBehaviour
         {
             var tempColor = fadeToWhite.GetComponent<Image>().color;
             tempColor.a += Time.deltaTime * 1f;
-            Debug.Log(tempColor.a);
+            //Debug.Log(tempColor.a);
             fadeToWhite.color = tempColor;
         }
         //Steadily grow light range to cover screen

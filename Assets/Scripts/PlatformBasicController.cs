@@ -10,7 +10,7 @@ public class PlatformBasicController : MonoBehaviour
     public bool debug;
 
     private BoxCollider2D col;
-    private SpriteRenderer sr;
+    public SpriteRenderer platformSprite;
     private PlatformFallTrigger falltrig;
     private EyesAnimations eyes;
 
@@ -18,7 +18,7 @@ public class PlatformBasicController : MonoBehaviour
     void Start()
     {
         col = gameObject.GetComponent<BoxCollider2D>();
-        sr = gameObject.GetComponent<SpriteRenderer>();
+        //sr = gameObject.GetComponent<SpriteRenderer>();
         falltrig = GetComponentInChildren<PlatformFallTrigger>();
         eyes = GetComponentInChildren<EyesAnimations>();
 
@@ -43,7 +43,7 @@ public class PlatformBasicController : MonoBehaviour
     {
         platformOn = false;
         col.enabled = false;
-        sr.enabled = false;
+        platformSprite.enabled = false;
         eyes.GetComponent<SpriteRenderer>().enabled = false;
     }
 
@@ -54,7 +54,7 @@ public class PlatformBasicController : MonoBehaviour
             currDelay = turnoffDelay;
             platformOn = true;
             col.enabled = true;
-            sr.enabled = true;
+            platformSprite.enabled = true;
             eyes.GetComponent<SpriteRenderer>().enabled = true;
         }
     }
