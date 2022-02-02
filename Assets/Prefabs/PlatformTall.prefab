@@ -308,6 +308,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   platformOn: 0
   debug: 0
+  platformSprite: {fileID: 289598321345496945}
 --- !u!1001 &4543251139949127224
 PrefabInstance:
   m_ObjectHideFlags: 0

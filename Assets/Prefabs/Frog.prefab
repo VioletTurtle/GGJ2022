@@ -241,9 +241,8 @@ MonoBehaviour:
   waypoints:
   - {fileID: 5534887374355510752}
   lr: {fileID: 0}
-  FrogMaxTime: 1
-  tongueOut: {fileID: 8300000, guid: f661d9ff330e8bb42a98add84b6ec4fe, type: 3}
-  tongueIn: {fileID: 8300000, guid: d6d6e84bc82f53e499d526ad1d89f39a, type: 3}
+  FrogMaxTime: 0.35
+  tongueOut: {fileID: 8300000, guid: 67383c1a2c460894784c5fd3703d4682, type: 3}
 --- !u!120 &5534887374355510301
 LineRenderer:
   m_ObjectHideFlags: 0

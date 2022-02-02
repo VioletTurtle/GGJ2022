@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class FinalPlatform : MonoBehaviour
@@ -20,7 +21,7 @@ public class FinalPlatform : MonoBehaviour
     {
         SlowTime();
         GrowLight();
-        Debug.Log("Timescale = " + Time.timeScale);
+        //Debug.Log("Timescale = " + Time.timeScale);
     }
 
     private void OnCollisionStay2D(Collision2D collision)
@@ -36,23 +37,29 @@ public class FinalPlatform : MonoBehaviour
     {
         if(collision.gameObject.tag == "Player")
         {
-            //steadily slow time for a certain amount of time. 
-            slowTimeCheck = true;
-            GameObject.FindGameObjectWithTag("WinDetect").GetComponent<MenuImageChanger>().hasWon = true;
-
-
+            //steadily slow time for a certain amount of time.
+            if(collision.gameObject.GetComponent<Rigidbody2D>().velocity.y > 0f) //dont win if you just fall off platform
+            {
+                slowTimeCheck = true;
+                if (GameObject.FindGameObjectWithTag("WinDetect"))
+                {
+                    GameObject.FindGameObjectWithTag("WinDetect").GetComponent<MenuImageChanger>().hasWon = true;
+                }
+            }
         }
     }
 
     void SlowTime()
     {
         if (slowTimeCheck) {
-            Time.timeScale = Mathf.Pow(Time.fixedDeltaTime, -2);
-            if (Time.timeScale <= 0.01 || Time.timeScale >= 100)
+            Time.timeScale = Time.timeScale - Time.deltaTime;
+            if (Time.timeScale >= 100 || Time.timeScale <= 0.2f)
             {
                 slowTimeCheck = false;
-                Time.timeScale = 1.0f;
+                SceneManager.LoadScene("Credits");
             }
+            
+            
         }
     }
 
@@ -61,7 +68,8 @@ public class FinalPlatform : MonoBehaviour
         if (slowTimeCheck)
         {
             var tempColor = fadeToWhite.GetComponent<Image>().color;
-            tempColor.a += Time.deltaTime * 0.5f;
+            tempColor.a += Time.deltaTime * 1f;
+            //Debug.Log(tempColor.a);
             fadeToWhite.color = tempColor;
         }
         //Steadily grow light range to cover screen

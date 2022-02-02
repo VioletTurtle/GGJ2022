@@ -26,7 +26,20 @@ public class PlayerController : MonoBehaviour
     private GameObject currentPlatform;
     private Vector3 platformOffset;
     private setCursor cursorScript;
- 
+
+    private AudioSource aSource;
+    public AudioClip soundJump;
+    public AudioClip soundOpen;
+    public AudioClip soundClose;
+
+    //not an elegant solution
+    //0.1 seconds to give fixed update a chance to update ground state to prvent super jump by having multiple jump inputs in one fixed update framea
+    private float jumpDelayTime;
+
+    private MenuImageChanger winChecker;
+    private FlashlightAiming aiming;
+    public bool paused;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -34,21 +47,29 @@ public class PlayerController : MonoBehaviour
         light2d = gameObject.transform.GetChild(0).GetComponentInChildren<Light2D>();
         lantray = GetComponentInChildren<LanternRaycast>();
         cursorScript = GetComponent<setCursor>();
-
-
+        aSource = GetComponent<AudioSource>();
+        
         lampOn = true;
         ToggleLight(false);
+
+        winChecker = GameObject.FindGameObjectWithTag("WinDetect").GetComponent<MenuImageChanger>();
+        aiming = GetComponentInChildren<FlashlightAiming>();
     }
 
     // Update is called once per frame
     void Update()
     {
         Move();
-        Jump();
+        if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.Mouse1) || Input.GetKeyDown(KeyCode.Keypad0)) //space, right click, or num zero for jump
+            Jump();
+        
         if (Input.GetKeyDown(KeyCode.Mouse0))
             ToggleLight(!lampOn);
         
         AirborneMath();
+
+        if (Input.GetKeyDown(KeyCode.P))
+            TogglePause();
     }
 
     private void ToggleLight(bool on)
@@ -60,6 +81,8 @@ public class PlayerController : MonoBehaviour
             lantray.enabled = lampOn;
             animScript.UpdateLanternSprite(lampOn);
             cursorScript.UpdateCursor(setCursor.CursorType.reticleOn);
+            aSource.clip = soundOpen;
+            aSource.Play();
         }
         if(lampOn && !on)
         {
@@ -67,7 +90,9 @@ public class PlayerController : MonoBehaviour
             light2d.enabled = lampOn;
             lantray.enabled = lampOn;
             animScript.UpdateLanternSprite(lampOn);
-            cursorScript.UpdateCursor(setCursor.CursorType.reticleOff);
+            cursorScript.UpdateCursor(setCursor.CursorType.reticleOff); 
+            aSource.clip = soundClose;
+            aSource.Play();
         }
     }
 
@@ -83,18 +108,18 @@ public class PlayerController : MonoBehaviour
 
     void Jump()
     {
-        if (isGrounded)
+        if (isGrounded && jumpDelayTime >= 0.1f)
         {
-            if (Input.GetKeyDown(KeyCode.Space))
-            {
-                //V = Square root of (2 g h)
-                float jumpImpulse = Mathf.Sqrt(2 * rigBody.gravityScale * jumpHeight);
-                rigBody.AddForce(transform.up * jumpImpulse, ForceMode2D.Impulse);
-                //rigBody.AddForce(transform.up * jumpSpeed, ForceMode2D.Impulse);
-                isGrounded = false;
-                //startingTime = Time.time; //Replace with Time.deltaTime;
-
-            }
+            aSource.clip = soundJump;
+            aSource.Play();
+            isGrounded = false;
+            jumpDelayTime = 0f;
+            //Debug.Log("jumped!");
+            //V = Square root of (2 g h)
+            float jumpImpulse = Mathf.Sqrt(2 * rigBody.gravityScale * jumpHeight);
+            rigBody.AddForce(transform.up * jumpImpulse, ForceMode2D.Impulse);
+            //rigBody.AddForce(transform.up * jumpSpeed, ForceMode2D.Impulse);
+            //startingTime = Time.time; //Replace with Time.deltaTime;
         }
     }
 
@@ -121,10 +146,12 @@ public class PlayerController : MonoBehaviour
         currentPlatform = null;
         gameObject.transform.parent = null;
         animScript.UpdateJump(!isGrounded); //call whenever isgrounded is updated
+
+        if (jumpDelayTime < 0.1f)
+            jumpDelayTime += Time.fixedDeltaTime;
     }
     void OnCollisionEnter2D(Collision2D collision)
     {
-        
         if (collision.gameObject.tag == "Ground")
         {
             CheckGround(collision.contacts, collision);
@@ -156,7 +183,7 @@ public class PlayerController : MonoBehaviour
         {
             //Debug.Log(cp.normal);
             Debug.DrawRay(cp.point, cp.normal);
-            if (cp.normal.y >= 0.9)
+            if (cp.normal.y >= 0.9) //prevent thinking walls are ground
             {
                 Debug.DrawRay(cp.point, cp.normal, Color.green);
                 isGrounded = true;
@@ -180,6 +207,16 @@ public class PlayerController : MonoBehaviour
                 gameObject.transform.SetParent(currentPlatform.transform, true); //WARNING this gets set every physics frame but whatever
                 //platformOffset = currentPlatform.transform.position - transform.position;
             }
+        }
+    }
+
+    void TogglePause()
+    {
+        if(winChecker.hasWon == false) //dont pause during exit fade
+        {
+            Time.timeScale = paused ? 1f : 0f;
+            aiming.enabled = paused;
+            paused = !paused;
         }
     }
 }
