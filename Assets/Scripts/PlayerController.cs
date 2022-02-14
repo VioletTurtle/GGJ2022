@@ -16,6 +16,7 @@ public class PlayerController : MonoBehaviour
     float startingTime;
     public float fallTimer = .3f;
     private float timeInAir = 0f;
+    public float Oil = 100f;
 
     public bool lampOn;
     private Light2D light2d;
@@ -51,8 +52,10 @@ public class PlayerController : MonoBehaviour
         
         lampOn = true;
         ToggleLight(false);
-
-        winChecker = GameObject.FindGameObjectWithTag("WinDetect").GetComponent<MenuImageChanger>();
+        if (GameObject.FindGameObjectWithTag("WinDetect"))
+        {
+            winChecker = GameObject.FindGameObjectWithTag("WinDetect").GetComponent<MenuImageChanger>();
+        }
         aiming = GetComponentInChildren<FlashlightAiming>();
     }
 
@@ -70,6 +73,7 @@ public class PlayerController : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.P))
             TogglePause();
+        DrainOil();
     }
 
     private void ToggleLight(bool on)
@@ -219,4 +223,22 @@ public class PlayerController : MonoBehaviour
             paused = !paused;
         }
     }
+
+    void DrainOil()
+    {
+        if (lampOn)
+        {
+            Oil -= 1 * Time.deltaTime;
+        }
+    }
+
+    public void ChangeOil(float amount)
+    {
+        Oil += amount * 2 * Time.deltaTime;
+        if(Oil > 100)
+        {
+            Oil = 100;
+        }
+    }
+
 }
