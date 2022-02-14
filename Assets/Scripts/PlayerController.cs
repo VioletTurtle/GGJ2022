@@ -17,6 +17,7 @@ public class PlayerController : MonoBehaviour
     public float fallTimer = .3f;
     private float timeInAir = 0f;
     public float Oil = 100f;
+    bool oilEmpty = false;
 
     public bool lampOn;
     private Light2D light2d;
@@ -78,7 +79,7 @@ public class PlayerController : MonoBehaviour
 
     private void ToggleLight(bool on)
     {
-        if (!lampOn && !isFalling && on)
+        if (!lampOn && !isFalling && on && !oilEmpty)
         {
             lampOn = true;
             light2d.enabled = lampOn;
@@ -228,13 +229,24 @@ public class PlayerController : MonoBehaviour
     {
         if (lampOn)
         {
-            Oil -= 1 * Time.deltaTime;
+            Oil -= 2 * Time.deltaTime;
+            if (Oil < 0)
+            {
+                ToggleLight(false);
+                oilEmpty = true;
+                Oil = 0;
+            }
+            
         }
     }
 
     public void ChangeOil(float amount)
     {
         Oil += amount * 2 * Time.deltaTime;
+        if(Oil > 0)
+        {
+            oilEmpty = false;
+        }
         if(Oil > 100)
         {
             Oil = 100;
