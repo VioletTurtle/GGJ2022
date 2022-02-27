@@ -16,6 +16,8 @@ public class PlayerController : MonoBehaviour
     float startingTime;
     public float fallTimer = .3f;
     private float timeInAir = 0f;
+    public float Oil = 100f;
+    public bool oilEmpty = false;
 
     public bool lampOn;
     private Light2D light2d;
@@ -219,8 +221,6 @@ public class PlayerController : MonoBehaviour
             paused = !paused;
         }
     }
-<<<<<<< Updated upstream
-=======
 
     void DrainOil()
     {
@@ -254,5 +254,5 @@ public class PlayerController : MonoBehaviour
     {
         Oil = amount;
     }
->>>>>>> Stashed changes
+
 }
