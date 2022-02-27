@@ -219,4 +219,40 @@ public class PlayerController : MonoBehaviour
             paused = !paused;
         }
     }
+<<<<<<< Updated upstream
+=======
+
+    void DrainOil()
+    {
+        if (lampOn)
+        {
+            Oil -= 2 * Time.deltaTime;
+            if (Oil < 0)
+            {
+                ToggleLight(false);
+                oilEmpty = true;
+                Oil = 0;
+            }
+            
+        }
+    }
+
+    public void ChangeOil(float amount)
+    {
+        Oil += amount * 2 * Time.deltaTime;
+        if(Oil > 0)
+        {
+            oilEmpty = false;
+        }
+        if(Oil > 100)
+        {
+            Oil = 100;
+        }
+    }
+
+    public void SetOil(float amount)
+    {
+        Oil = amount;
+    }
+>>>>>>> Stashed changes
 }

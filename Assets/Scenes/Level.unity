@@ -648,6 +648,51 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 3090095600225740085, guid: 421226cfea9d23e41828378deebd0bfd, type: 3}
   m_PrefabInstance: {fileID: 1066579362}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &293888207
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 293888209}
+  - component: {fileID: 293888208}
+  m_Layer: 0
+  m_Name: SaveManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &293888208
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 293888207}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3ac0605980cbc5f4ea21ed33d3ec7443, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  filepath: C:/Users/thera/Documents/GitHub/GGJ2022/Assets/StreamingAssetssavefile.xml
+  player: {fileID: 1194658803}
+--- !u!4 &293888209
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 293888207}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 508.54007, y: 211.58327, z: -88.26852}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 18
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &303947377 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3909573235570125825, guid: dff2aff976314b04b8a332dde69ed774, type: 3}
@@ -2897,6 +2942,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bf4439a020cc499429e500aa92437efe, type: 3}
+--- !u!1 &1194658803 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1527128226850345550, guid: bf4439a020cc499429e500aa92437efe, type: 3}
+  m_PrefabInstance: {fileID: 1194658802}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1199456533 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1097312715362066221, guid: c95edae8ba0a4684d9f9c286afa74e97, type: 3}
