@@ -16,7 +16,7 @@ public class EnemyController : MonoBehaviour
     float frogAttackTimer = 2f;
     public List<Transform> waypoints;
     bool attackReady = true;
-    GameObject tongueTip;
+    public float tongueSpeed = 5f;
     public LineRenderer lr;
     float timer;
     public float FrogMaxTime = 2f;
@@ -180,20 +180,28 @@ public class EnemyController : MonoBehaviour
         aSource.clip = tongueOut;
         aSource.Play();
 
-        lr.SetPosition(0, gameObject.transform.position);
-        lr.SetPosition(1, player.transform.position);
-        attackReady = true;
-        StartCoroutine("RemoveTongue");
+        lr.SetPosition(0, gameObject.transform.position + new Vector3(0f, .2f, 0f));
+        lr.SetPosition(1, gameObject.transform.position);
+        lr.enabled = true;
+        StartCoroutine("MoveTongue");
         player.gameObject.GetComponent<PlayerController>().EnemyAttack(new Vector2(0, 5));
+    }
+
+    IEnumerator MoveTongue()
+    {
+        while (Vector3.Distance(lr.GetPosition(1), player.transform.position) > .1f)
+        {
+            lr.SetPosition(1, Vector3.Lerp(lr.GetPosition(1), player.transform.position, tongueSpeed));
+            yield return new WaitForSeconds(0.0167f);
+        }
+        StartCoroutine("RemoveTongue");
     }
 
     IEnumerator RemoveTongue()
     {
-        lr.enabled = true;
-        yield return new WaitForSeconds(0.5f);
-        //aSource.clip = tongueIn;
-        //aSource.Play();
+        yield return new WaitForSeconds(0.1f);
         lr.enabled = false;
+        attackReady = true;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
