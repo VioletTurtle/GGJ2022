@@ -11,8 +11,10 @@ public class CameraManager : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (player.position.y > 100)
+        if (player.position.y > 500)
             targetPos = new Vector3(transform.position.x, 100f, transform.position.z);
+        else if (player.position.y < 0)
+            targetPos = new Vector3(transform.position.x, 0f, transform.position.z);
         else
             targetPos = new Vector3(transform.position.x, player.position.y + 2.5f, transform.position.z);
         transform.position = targetPos;
