@@ -703,10 +703,12 @@ MonoBehaviour:
   aiBehavior: 2
   aiType: 1
   speed: 0
+  waypointIndex: 0
   waypoints:
   - {fileID: 1282846976}
   lr: {fileID: 0}
   FrogMaxTime: 2
+  tongueOut: {fileID: 0}
 --- !u!212 &1282846975
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -799,11 +801,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.8828125, y: 1}
   m_EdgeRadius: 0
---- !u!1 &1358816600 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4496902767375958090, guid: bf4439a020cc499429e500aa92437efe, type: 3}
-  m_PrefabInstance: {fileID: 1527128225724322186}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1452641850
 GameObject:
   m_ObjectHideFlags: 0
@@ -1279,11 +1276,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1527128226850345539, guid: bf4439a020cc499429e500aa92437efe, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 2.3
+      value: 2.26
       objectReference: {fileID: 0}
     - target: {fileID: 1527128226850345539, guid: bf4439a020cc499429e500aa92437efe, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 4.14
+      value: 3.32
       objectReference: {fileID: 0}
     - target: {fileID: 1527128226850345539, guid: bf4439a020cc499429e500aa92437efe, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1321,14 +1318,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
-    - target: {fileID: 1527128226850345551, guid: bf4439a020cc499429e500aa92437efe, type: 3}
-      propertyPath: lantern
-      value: 
-      objectReference: {fileID: 1358816600}
-    - target: {fileID: 1527128226850345551, guid: bf4439a020cc499429e500aa92437efe, type: 3}
-      propertyPath: fallTimer
-      value: 10
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bf4439a020cc499429e500aa92437efe, type: 3}
 --- !u!1001 &2727010432453527528
@@ -1340,7 +1329,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1097312715362066221, guid: c95edae8ba0a4684d9f9c286afa74e97, type: 3}
       propertyPath: m_RootOrder
-      value: 7
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 1097312715362066221, guid: c95edae8ba0a4684d9f9c286afa74e97, type: 3}
       propertyPath: m_LocalPosition.x
