@@ -16,7 +16,7 @@ public class EnemyController : MonoBehaviour
     float frogAttackTimer = 2f;
     public List<Transform> waypoints;
     bool attackReady = true;
-    public float tongueSpeed = 5f;
+    public float tongueSpeed = 0.4f;
     public LineRenderer lr;
     float timer;
     public float FrogMaxTime = 2f;
