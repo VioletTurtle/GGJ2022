@@ -66,7 +66,9 @@ public class PlayerController : MonoBehaviour
         Move();
         if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.Mouse1) || Input.GetKeyDown(KeyCode.Keypad0)) //space, right click, or num zero for jump
             Jump();
-        
+        if (Input.GetKey(KeyCode.Space) || Input.GetKeyDown(KeyCode.Mouse1) || Input.GetKeyDown(KeyCode.Keypad0)) //space, right click, or num zero for jump
+            Jump();
+
         if (Input.GetKeyDown(KeyCode.Mouse0))
             ToggleLight(!lampOn);
         
