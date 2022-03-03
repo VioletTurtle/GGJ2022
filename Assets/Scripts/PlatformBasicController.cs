@@ -6,6 +6,7 @@ public class PlatformBasicController : MonoBehaviour
 {
     private float turnoffDelay = 0.5f;
     private float currDelay;
+    public bool invert = false;
     public bool platformOn = false;
     public bool debug;
 
@@ -28,7 +29,7 @@ public class PlatformBasicController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (platformOn)
+        if ((!invert && platformOn) || (invert && !platformOn))
         {
             if (debug)
                 Debug.Log(currDelay);
@@ -41,21 +42,39 @@ public class PlatformBasicController : MonoBehaviour
 
     private void TurnOff()
     {
-        platformOn = false;
-        col.enabled = false;
-        platformSprite.enabled = false;
-        eyes.GetComponent<SpriteRenderer>().enabled = false;
+        if (invert)
+        {
+            platformOn = true;
+            col.enabled = true;
+            platformSprite.enabled = true;
+            eyes.GetComponent<SpriteRenderer>().enabled = true;
+        }
+        else if(!invert)
+        {
+            platformOn = false;
+            col.enabled = false;
+            platformSprite.enabled = false;
+            eyes.GetComponent<SpriteRenderer>().enabled = false;
+        }
     }
 
     public void TurnOn()
     {
-        if (!falltrig.colliding) //prevent turning on a platform when the player is colliding with it
+        if (!falltrig.colliding && !invert) //prevent turning on a platform when the player is colliding with it
         {
             currDelay = turnoffDelay;
             platformOn = true;
             col.enabled = true;
             platformSprite.enabled = true;
             eyes.GetComponent<SpriteRenderer>().enabled = true;
+        }
+        else if (invert)
+        {
+            currDelay = turnoffDelay;
+            platformOn = false;
+            col.enabled = false;
+            platformSprite.enabled = false;
+            eyes.GetComponent<SpriteRenderer>().enabled = false;
         }
     }
 

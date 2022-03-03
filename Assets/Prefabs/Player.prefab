@@ -185,7 +185,8 @@ MonoBehaviour:
   jumpHeight: 35
   isGrounded: 0
   isFalling: 0
-  fallTimer: 1
+  fallTimer: 10
+  Oil: 100
   lampOn: 0
   animScript: {fileID: 3154077196080811772}
   soundJump: {fileID: 8300000, guid: eaaf6a1a67cca7848a19e6332481d42f, type: 3}
@@ -219,8 +220,8 @@ MonoBehaviour:
   m_ShadowVolumeIntensity: 0
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
-  m_PointLightInnerRadius: 1.5
-  m_PointLightOuterRadius: 1.5
+  m_PointLightInnerRadius: 0.7
+  m_PointLightOuterRadius: 0.7
   m_PointLightDistance: 3
   m_PointLightQuality: 1
   m_ShapeLightParametricSides: 5
@@ -946,6 +947,18 @@ PrefabInstance:
     - target: {fileID: 2445488715100414079, guid: e893d8359060e4846b4e3b55f8636695, type: 3}
       propertyPath: m_Layer
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2895390543883938233, guid: e893d8359060e4846b4e3b55f8636695, type: 3}
+      propertyPath: m_PointLightOuterRadius
+      value: 23
+      objectReference: {fileID: 0}
+    - target: {fileID: 2895390543883938233, guid: e893d8359060e4846b4e3b55f8636695, type: 3}
+      propertyPath: m_ApplyToSortingLayers.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 2895390543883938233, guid: e893d8359060e4846b4e3b55f8636695, type: 3}
+      propertyPath: m_ApplyToSortingLayers.Array.data[3]
+      value: 974678079
       objectReference: {fileID: 0}
     - target: {fileID: 3123605032070291384, guid: e893d8359060e4846b4e3b55f8636695, type: 3}
       propertyPath: m_Name
