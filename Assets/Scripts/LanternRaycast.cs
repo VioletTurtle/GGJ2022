@@ -49,6 +49,7 @@ public class LanternRaycast : MonoBehaviour
                             //Debug.LogWarning("Turning on!");
                             hitObject.GetComponentInParent<PlatformBasicController>().TurnOn();
                         }
+
                     }
                     //Add code here for enemy tag
                     if (hitObject.CompareTag("Enemy"))

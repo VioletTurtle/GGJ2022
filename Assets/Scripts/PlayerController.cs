@@ -54,7 +54,10 @@ public class PlayerController : MonoBehaviour
         lampOn = true;
         ToggleLight(false);
 
-        winChecker = GameObject.FindGameObjectWithTag("WinDetect").GetComponent<MenuImageChanger>();
+        if (GameObject.FindGameObjectWithTag("WinDetect") != null)
+        {
+            winChecker = GameObject.FindGameObjectWithTag("WinDetect").GetComponent<MenuImageChanger>();
+        }
         aiming = GetComponentInChildren<FlashlightAiming>();
     }
 
