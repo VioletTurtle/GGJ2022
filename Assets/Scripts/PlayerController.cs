@@ -72,11 +72,22 @@ public class PlayerController : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.P))
             TogglePause();
+
+        if(!oilEmpty && lampOn)
+        {
+            DrainOil(); //Drain oil if lamp is on
+            if (Oil <= 0)
+            {
+                oilEmpty = true;
+                ToggleLight(false);
+            }
+        }
+
     }
 
     private void ToggleLight(bool on)
     {
-        if (!lampOn && !isFalling && on)
+        if (!lampOn && !isFalling && on && !oilEmpty)
         {
             lampOn = true;
             light2d.enabled = lampOn;
