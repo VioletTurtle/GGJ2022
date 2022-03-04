@@ -949,10 +949,6 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2895390543883938233, guid: e893d8359060e4846b4e3b55f8636695, type: 3}
-      propertyPath: m_ShadowIntensity
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2895390543883938233, guid: e893d8359060e4846b4e3b55f8636695, type: 3}
       propertyPath: m_PointLightOuterRadius
       value: 23
       objectReference: {fileID: 0}
