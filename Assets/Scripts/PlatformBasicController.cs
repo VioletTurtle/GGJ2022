@@ -8,6 +8,8 @@ public class PlatformBasicController : MonoBehaviour
     private float currDelay;
     public bool platformOn = false;
     public bool debug;
+    public ParticleSystem poofIn;
+    public ParticleSystem poofOut;
 
     private BoxCollider2D col;
     public SpriteRenderer platformSprite;
@@ -41,21 +43,33 @@ public class PlatformBasicController : MonoBehaviour
 
     private void TurnOff()
     {
+        if (platformOn && poofOut != null)
+        {
+            poofOut.Play();
+        }
+       // poofOut.Play();
         platformOn = false;
         col.enabled = false;
         platformSprite.enabled = false;
         eyes.GetComponent<SpriteRenderer>().enabled = false;
+        
     }
 
     public void TurnOn()
     {
         if (!falltrig.colliding) //prevent turning on a platform when the player is colliding with it
         {
+            if (!platformOn && poofIn != null)
+            {
+                poofIn.Play();
+            }
+           // poofIn.Play();
             currDelay = turnoffDelay;
             platformOn = true;
             col.enabled = true;
             platformSprite.enabled = true;
             eyes.GetComponent<SpriteRenderer>().enabled = true;
+            
         }
     }
 
