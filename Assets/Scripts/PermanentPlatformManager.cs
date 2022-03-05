@@ -20,7 +20,7 @@ public class PermanentPlatformManager : MonoBehaviour
     {
         if(collision.gameObject.tag == "Player")
         {
-            collision.gameObject.SendMessage("ChangeOil", 3);
+            collision.gameObject.SendMessage("ChangeOil", 20);
         }
     }
 }
