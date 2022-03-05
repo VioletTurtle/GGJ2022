@@ -387,6 +387,7 @@ GameObject:
   - component: {fileID: 4177112237417116476}
   - component: {fileID: 8094413276745489090}
   - component: {fileID: 4662363638452020991}
+  - component: {fileID: 3174220159520482466}
   m_Layer: 0
   m_Name: PlatformSprite
   m_TagString: Ground
@@ -487,6 +488,18 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.64, y: 0.17}
   m_EdgeRadius: 0
+--- !u!114 &3174220159520482466
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8888471092398155586}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 696ae280568d3654c93497c791217666, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &3413080060755642057
 PrefabInstance:
   m_ObjectHideFlags: 0
