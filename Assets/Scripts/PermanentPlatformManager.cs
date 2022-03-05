@@ -23,4 +23,12 @@ public class PermanentPlatformManager : MonoBehaviour
             collision.gameObject.SendMessage("ChangeOil", 20);
         }
     }
+
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        if(collision.gameObject.tag == "Player")
+        {
+            collision.gameObject.SendMessage("ChangeOil", 20);
+        }
+    }
 }
