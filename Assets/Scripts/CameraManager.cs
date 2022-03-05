@@ -13,7 +13,7 @@ public class CameraManager : MonoBehaviour
     {
         if (player.position.y > 500)
             targetPos = new Vector3(transform.position.x, 100f, transform.position.z);
-        else if (player.position.y < 0)
+        else if (player.position.y < -2.5)
             targetPos = new Vector3(transform.position.x, 0f, transform.position.z);
         else
             targetPos = new Vector3(transform.position.x, player.position.y + 2.5f, transform.position.z);
