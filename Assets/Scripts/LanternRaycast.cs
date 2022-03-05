@@ -38,20 +38,22 @@ public class LanternRaycast : MonoBehaviour
                 {
                     if (rayHit.collider != null)
                     {
-                        //Debug.Log("Hit something: " + rayHit.collider.name);
                         GameObject hitObject = rayHit.collider.gameObject;
                         if (hitObject.CompareTag("PlatformChild"))
                         {
+                            PlatformBasicController pbc = null;
                             if (hitObject.GetComponentInParent<PlatformBasicController>() != null)
                             {
-                                //Debug.LogWarning("Turning on!");
-                                hitObject.GetComponentInParent<PlatformBasicController>().TurnOn();
+                                pbc = hitObject.GetComponentInParent<PlatformBasicController>();
                             }
-
-                            if (hitObject.transform.parent.GetComponentInParent<PlatformBasicController>() != null)
+                            //
+                            //
+                            // CORRECT NAME OF ANTI-PLATFORM BELOW!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+                            //
+                            //
+                            if (pbc != null && !hitObject.name.Contains("reverse"))
                             {
-                                //Debug.LogWarning("Turning on!");
-                                hitObject.GetComponentInParent<PlatformBasicController>().TurnOn();
+                                pbc.TurnOn();
                             }
                         }
                         //Add code here for enemy tag
@@ -61,7 +63,12 @@ public class LanternRaycast : MonoBehaviour
                         }
 
                         //Check if ray "passes through"
-                        if (!hitObject.name.Contains("glass"))
+                        //
+                        //
+                        // CORRECT NAME OF ANTI-PLATFORM BELOW!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+                        //
+                        //
+                        if (!hitObject.name.Contains("glass") && !hitObject.name.Contains("reverse"))
                         {
                             break;
                         }
