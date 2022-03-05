@@ -354,6 +354,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
+  - {fileID: 990967698}
+  - {fileID: 810985230}
   - {fileID: 1626303218}
   - {fileID: 522144290}
   - {fileID: 1488906692}
@@ -362,8 +364,6 @@ Transform:
   - {fileID: 213796973}
   - {fileID: 1249423794}
   - {fileID: 1823696089}
-  - {fileID: 810985230}
-  - {fileID: 990967698}
   - {fileID: 1328461140}
   m_Father: {fileID: 0}
   m_RootOrder: 18
@@ -6451,7 +6451,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 129605254435746301, guid: 6b5da2aa842e18a4db5b3d2a8be8bb8e, type: 3}
       propertyPath: waypoints.Array.size
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 129605254435746301, guid: 6b5da2aa842e18a4db5b3d2a8be8bb8e, type: 3}
       propertyPath: waypoints.Array.data[0]
@@ -6461,6 +6461,10 @@ PrefabInstance:
       propertyPath: waypoints.Array.data[1]
       value: 
       objectReference: {fileID: 1990380031}
+    - target: {fileID: 129605254435746301, guid: 6b5da2aa842e18a4db5b3d2a8be8bb8e, type: 3}
+      propertyPath: waypoints.Array.data[2]
+      value: 
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6b5da2aa842e18a4db5b3d2a8be8bb8e, type: 3}
 --- !u!1001 &1249423793
@@ -14968,23 +14972,23 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 1308729935}
-  - {fileID: 74306045}
-  - {fileID: 1209367028}
-  - {fileID: 1020114190}
-  - {fileID: 631074401}
-  - {fileID: 2084518129}
-  - {fileID: 1538567299}
-  - {fileID: 469061312}
-  - {fileID: 266245330}
-  - {fileID: 855152167}
-  - {fileID: 273419375}
-  - {fileID: 945761319}
-  - {fileID: 1342746240}
-  - {fileID: 967110070}
-  - {fileID: 953861533}
-  - {fileID: 80736985}
   - {fileID: 1384620829}
+  - {fileID: 80736985}
+  - {fileID: 953861533}
+  - {fileID: 967110070}
+  - {fileID: 1342746240}
+  - {fileID: 945761319}
+  - {fileID: 273419375}
+  - {fileID: 855152167}
+  - {fileID: 266245330}
+  - {fileID: 469061312}
+  - {fileID: 1538567299}
+  - {fileID: 2084518129}
+  - {fileID: 1020114190}
+  - {fileID: 1209367028}
+  - {fileID: 74306045}
+  - {fileID: 1308729935}
+  - {fileID: 631074401}
   - {fileID: 1453249514}
   m_Father: {fileID: 0}
   m_RootOrder: 17
