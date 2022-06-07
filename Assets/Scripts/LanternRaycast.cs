@@ -59,7 +59,8 @@ public class LanternRaycast : MonoBehaviour
                         //Add code here for enemy tag
                         if (hitObject.CompareTag("Enemy"))
                         {
-                            hitObject.GetComponent<EnemyController>().ReactToLight();
+                            //if EnemyScript doesn't work change to EnemyController
+                            hitObject.GetComponent<EnemyScript>().ReactToLight();
                         }
 
                         //Check if ray "passes through"

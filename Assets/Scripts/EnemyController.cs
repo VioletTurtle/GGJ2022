@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public enum Behaviors {Patrol, Attack, Idle};
-public enum EnemyType { Moth, Frog};
+public enum EnemyType { Moth, Frog, Ghost};
 
 public class EnemyController : MonoBehaviour
 {
@@ -81,6 +81,10 @@ public class EnemyController : MonoBehaviour
         {
             aiBehavior = Behaviors.Idle;
         }
+        if (aiType == EnemyType.Ghost)
+        {
+            aiBehavior = Behaviors.Idle;
+        }
     }
     void Move()
     {
@@ -102,6 +106,10 @@ public class EnemyController : MonoBehaviour
                 if (!frogAnimate.sleeping)
                     frogAnimate.UpdateSleep(true);
             }
+        }
+        if(aiType == EnemyType.Ghost)
+        {
+            Chase();
         }
     }
     void Attack()
@@ -137,6 +145,10 @@ public class EnemyController : MonoBehaviour
             //get light source
             //run a countdown/coroutine, if it finishes the frog will attack the light source/player with its tongue
         }
+        if(aiType == EnemyType.Ghost)
+        {
+            GhostIdle();
+        }
         
     }
 
@@ -160,6 +172,18 @@ public class EnemyController : MonoBehaviour
             
 
             mothAnimate.right = (targetPosition - transform.position).normalized.x > 0 ? true : false;
+        }
+    }
+
+    void Chase()
+    {
+        Debug.Log("Ghost is in chase mode");
+        Transform target = player.transform;
+        float distance = Vector3.Distance(gameObject.transform.position, target.position);
+        float delta = speed * Time.deltaTime;
+        if (distance < 30)
+        {
+            transform.position = Vector2.MoveTowards(transform.position, target.position, delta);
         }
     }
 
@@ -195,6 +219,11 @@ public class EnemyController : MonoBehaviour
             yield return new WaitForSeconds(0.0167f);
         }
         StartCoroutine("RemoveTongue");
+    }
+
+    void GhostIdle()
+    {
+        //Ghost does nothing
     }
 
     IEnumerator RemoveTongue()
