@@ -27,5 +27,12 @@ public class GhostScript : EnemyScript
         }
     }
 
-    
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.name == "Player")//If hit by enemy tagged object, knockback
+        {
+            Vector2 dir = collision.gameObject.transform.position - gameObject.transform.position;
+            collision.gameObject.GetComponent<PlayerController>().EnemyAttack(dir);
+        }
+    }
 }
